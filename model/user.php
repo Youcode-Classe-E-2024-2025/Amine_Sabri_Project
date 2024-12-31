@@ -34,6 +34,26 @@ class User{
             return false;
         }
     }
+
+    public function signIn($email,$password){
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $test = $this->db->prepare($sql);
+        $test->execute([$email]);
+        $user = $test->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                echo "Connexion réussie!";
+                return true;
+            } else {
+                echo "Mot de passe incorrect.";
+                return false;
+            }
+        } else {
+            echo "Utilisateur non trouvé.";
+            return false;
+        }
+    }
 }
 
 ?>
