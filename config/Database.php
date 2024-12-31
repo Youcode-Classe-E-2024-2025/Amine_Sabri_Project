@@ -20,4 +20,13 @@ class Database {
         return $this->pdo;
     }
 }
+
+
+// $database = new Database();
+// $pdo = $database->getConnection();
+
+// if($pdo = true){
+//     echo"<br>";
+//     echo "connect";
+// }
 ?>
