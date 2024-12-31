@@ -38,11 +38,14 @@ class UserController {
 
             $userModel = new User();
             $user = $userModel->signIn($email, $password);
-
-            if ($user) {
-                echo "Welcome to Home";
-                header("Location: ../index.php");
-                exit;
+            if ($user) {    
+                if($user['role'] == 'user'){
+                    header("Location: ../views/layouts/user.php");
+                }elseif($user['role'] == 'admin'){
+                    header("../views/layouts/admin.php");
+                }else{
+                    header("Location: ../index.php");
+                }
             } else {
                 header("Location: ../views/sign/signIn.html");
                 exit;
@@ -51,10 +54,10 @@ class UserController {
     }
 }
 
-// $user = new UserController();
-// if (isset($_POST['action']) && $_POST['action'] === 'signup') {
-//     $user->create();
-// } elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
-//     $user->connexion();
-// }
+$user = new UserController();
+if (isset($_POST['action']) && $_POST['action'] === 'signup') {
+    $user->create();
+} elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
+    $user->connexion();
+}
 ?>

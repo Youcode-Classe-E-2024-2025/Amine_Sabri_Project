@@ -44,7 +44,7 @@ class User{
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 echo "Connexion réussie!";
-                return true;
+                return $user;
             } else {
                 echo "Mot de passe incorrect.";
                 return false;
