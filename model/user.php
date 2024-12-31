@@ -56,4 +56,9 @@ class User{
     }
 }
 
+// $insert = new User();
+// $insert->signUp("user","user@gmail.com","123456");
+// $insert->signIn("user@gmail.com","123456");
+
+
 ?>
