@@ -24,6 +24,6 @@
         }
     }
 
-$user = new UserController();
-$user->create();
+// $user = new UserController();
+// $user->create();
 ?>
