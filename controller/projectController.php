@@ -26,6 +26,6 @@
         }
     }
 
-    $projet = new ProjetController();
-    $projet->createProject();
+    // $projet = new ProjetController();
+    // $projet->createProject();
 ?>
