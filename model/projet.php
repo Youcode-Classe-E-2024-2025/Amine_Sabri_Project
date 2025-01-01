@@ -40,6 +40,21 @@
                 }
                 echo "Project modifier ";
         }
+        
+
+        public function delete($id){
+            $sql =" DELETE FROM projects WHERE id = ?";
+            $test = $this->db->prepare($sql);
+            $delete = $test->execute([
+                $id
+            ]);
+
+            if($delete){
+                echo "projet supprimer";
+            }else{
+                echo "projet n'est pas supprimer";
+            }
+        }
     }
 
 ?>
