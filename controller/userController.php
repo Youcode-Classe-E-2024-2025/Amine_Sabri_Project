@@ -40,9 +40,9 @@ class UserController {
             $user = $userModel->signIn($email, $password);
             if ($user) {    
                 if($user['role'] == 'user'){
-                    header("Location: ../views/layouts/user.php");
+                    header("Location: ../views/layouts/admin.php");
                 }elseif($user['role'] == 'admin'){
-                    header("../views/layouts/admin.php");
+                    header("../views/layouts/user.php");
                 }else{
                     header("Location: ../index.php");
                 }

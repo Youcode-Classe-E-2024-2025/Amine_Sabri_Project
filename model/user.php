@@ -40,6 +40,9 @@ class User{
         $test = $this->db->prepare($sql);
         $test->execute([$email]);
         $user = $test->fetch(PDO::FETCH_ASSOC);
+        
+        $_SESSION["username"] = $user["name"];
+        $_SESSION["user_id"] = $user["id"];
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
@@ -53,6 +56,15 @@ class User{
             echo "Utilisateur non trouvé.";
             return false;
         }
+    }
+
+    public static function getAll() {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = "SELECT * FROM users";
+        $test = $db->query($sql);
+        $users = $test->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
     }
 }
 
