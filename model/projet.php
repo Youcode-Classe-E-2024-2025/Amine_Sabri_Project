@@ -57,4 +57,20 @@
         }
     }
 
+
+
+    $project = new Projet();
+    // $project->create("Nouveau Projet" , "Ceci est un projet test" , 1 , "public", [2, 3, 4]);
+
+
+    // $name = "Updated Project Name";
+    // $description = "Updated Description";
+    // $createdBy = 1;
+    // $visibility = "public";
+    // $id_projet = 11; 
+    // $userIds = [16, 4, 5]; 
+    // $project->update($name, $description, $createdBy, $visibility, $id_projet, $userIds);
+
+
+    // $project->delete(10);
 ?>
