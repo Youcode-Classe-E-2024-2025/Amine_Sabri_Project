@@ -28,65 +28,78 @@ require_once '../../model/user.php';
     <!-- Main content -->
     <main class="container mx-auto p-6">
         <div class=" flex justify-end">
-            <button class = "border-2 border-green-500 px-8 py-1 rounded-lg bg-green-500 text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+            <button id="buttonAddProjet" class = "border-2 border-green-500 px-8 py-1 rounded-lg bg-green-500 text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
         </div>
 
 
-        <section class="w-full max-w-md">
-        <form action="../../controller/projectController.php" method="POST" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Create New Item</h2>
-            
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
-                <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            </div>
-            
-            <div class="mb-4">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description</label>
-                <textarea id="description" name="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-            </div>
-            
-            <input type="hidden" id="create_by" name="create_by" value="<?php echo $_SESSION['user_id']; ?>">
-            
-            <div class="mb-4">
-                <label for="visibility" class="block text-gray-700 text-sm font-bold mb-2">Visibility</label>
-                <div class="relative">
-                    <select name="visibility" id="visibility" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="public">Public</option>
-                        <option value="private">Private</option>
-                    </select>
+        
+        <section id="ModelProjet" class="w-full flex justify-center hidden ">
+            <form action="../../controller/projectController.php" method="POST" class="relative bg-yellow-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
+                <div id="closeModelProjet" class= "flex justify-end w-fit mb-[22px]  absolute left-[92%] bottom-[89%]"><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
+                <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Create New Item</h2>
+                <div class = "grid grid-cols-2 space-x-5">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-1">Name</label>
+                        <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="visibility" class="block text-gray-700 text-sm font-bold mb-1">Visibility</label>
+                        <div class="relative">
+                            <select name="visibility" id="visibility" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-3 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="mb-6">
-                <label for="assignUsers" class="block text-gray-700 text-sm font-bold mb-2">Assign Users</label>
-                <div class="relative">
-                    <select name="assignUsers[]" id="assignUsers" class="block appearance-none w-64 bg-white border border-gray-300 text-gray-700 py-1 px-2 rounded leading-tight focus:outline-none focus:shadow-outline" multiple>
-                        <?php
-                            $users = User::getAll();
-                            foreach ($users as $user) {
-                                echo "<option value='{$user['id']}'>{$user['name']}</option>";
-                            }
-                        ?>
-                    </select>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-1">Description</label>
+                    <textarea id="description" name="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
                 </div>
-            </div>
-            
-            <div class="flex items-center justify-center">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
-                    Create Item
-                </button>
-            </div>
-        </form>
-    </section>
+                <div>
+                    <input type="hidden" id="create_by" name="create_by" value="<?php echo $_SESSION['user_id']; ?>">
+                </div>
+                <div class="mb-6">
+                    <label for="assignUsers" class="block text-gray-700 text-sm font-bold mb-1">Assign Users</label>
+                    <div class="relative">
+                        <select name="assignUsers[]" id="assignUsers" class="block appearance-none w-64 bg-white border border-gray-300 text-gray-700 py-1 px-2 rounded leading-tight focus:outline-none focus:shadow-outline" multiple>
+                            <?php
+                                $users = User::getAll();
+                                foreach ($users as $user) {
+                                    echo "<option value='{$user['id']}'>{$user['name']}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex items-center justify-center">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                        Create Item
+                    </button>
+                </div>
+            </form>
+        </section>
     </main>
     <script>
         const menu_navbar = document.querySelector("#menu_navbar");
         const img_menu = document.querySelector("#img_menu");
+        const ModelProjet  = document.querySelector("#ModelProjet ");
+        const buttonAddProjet  = document.querySelector("#buttonAddProjet");
+        const closeModelProjet  = document.querySelector("#closeModelProjet");
+
 
         img_menu.addEventListener('click', function() {
             menu_navbar.classList.toggle("hidden");
         });
+        closeModelProjet.addEventListener('click', function() {
+            ModelProjet.classList.toggle("hidden");
+        });
+        buttonAddProjet.addEventListener('click', function() {
+            ModelProjet.classList.toggle("hidden");
+        });
+
+
     </script>
 </body>
 </html>
