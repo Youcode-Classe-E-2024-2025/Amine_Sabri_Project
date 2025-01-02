@@ -1,5 +1,6 @@
 <?php
 require_once '../../model/user.php';
+require_once '../../model/projet.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@ require_once '../../model/user.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header class="p-6 flex justify-between items-center shadow-lg">
+    <header class="p-6 flex justify-between items-center shadow-lg ">
         <h1 class=" text-2xl font-bold">TaskProjet</h1>
         <div class="flex space-x-2 items-center">
             <h2><?php echo $_SESSION["username"]?></h2>
@@ -28,12 +29,62 @@ require_once '../../model/user.php';
     <!-- Main content -->
     <main class="container mx-auto p-6">
         <div class=" flex justify-end">
-            <button id="buttonAddProjet" class = "border-2 border-green-500 px-8 py-1 rounded-lg bg-green-500 text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+            <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
         </div>
 
 
-        
-        <section id="ModelProjet" class="w-full flex justify-center hidden ">
+        <section>
+            <div class="container mx-auto p-6">
+                <h1 class="text-5xl font-bold text-center mb-8">Projects Showcase</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <?php
+                    $projects = Projet::getAllProjet();
+            
+                    if (!empty($projects)) {
+                        foreach ($projects as $project) {
+                            // Determine the text color based on visibility
+                            $visibilityColor = ($project['visibility'] == 'private') ? 'text-red-600' : 'text-green-600';
+                            
+                            echo "
+                            <div class='bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition duration-300'>
+                                <div class='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-2'>
+                                    <h2 class='text-xl font-bold mb-1 text-white'>{$project['name']}</h2>
+                                </div>
+                                <div class='p-4'>
+                                    <p class='text-gray-700 mb-2'>
+                                        <strong>Visibility:</strong> <span class='{$visibilityColor}'>" . ucfirst($project['visibility']) . "</span>
+                                    </p>
+                                    <p class='text-gray-700 mb-2'>
+                                        <strong>Description:</strong> {$project['description']}
+                                    </p>
+                                    <div class='flex justify-between items-center'>
+                                        <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
+                                        <form action='deleteProject.php' method='POST' class='inline'>
+                                            <input type='hidden' name='id' value='{$project['id']}'>
+                                            <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'><i class='bi bi-trash-fill'></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>";
+                        }
+                    } else {
+                        echo "<p class='text-center text-gray-500'>No projects available at the moment.</p>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+        <section id="ModelProjet" class="fixed top-32 left-[34%] hidden">
             <form action="../../controller/projectController.php" method="POST" class="relative bg-yellow-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
                 <div id="closeModelProjet" class= "flex justify-end w-fit mb-[22px]  absolute left-[92%] bottom-[89%]"><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
                 <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Create New Item</h2>

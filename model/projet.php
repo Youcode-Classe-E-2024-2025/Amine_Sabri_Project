@@ -55,6 +55,15 @@
                 echo "projet n'est pas supprimer";
             }
         }
+
+        public static function getAllProjet(){
+            $database = new Database();
+            $db = $database->getConnection();
+            $sql = "SELECT * FROM projects";
+            $test = $db->query($sql);
+            $projet = $test->fetchAll(PDO::FETCH_ASSOC);
+            return $projet;
+        }
     }
 
 
