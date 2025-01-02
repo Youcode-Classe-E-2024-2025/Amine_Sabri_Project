@@ -13,8 +13,7 @@ require_once '../../model/user.php';
 <body>
 <section id="ModelUpdateProjet" class="fixed top-32 left-[34%]">
         <?php
-        // Récupération des données du projet via le contrôleur
-        $users = ProjetController::getProjetId(); // Remplace par la bonne méthode pour récupérer les données
+            $users = ProjetController::getProjetId(); 
         ?>
     <form action="../../controller/projectController.php?id=<?= $users['id'] ?>" method="POST" class="relative bg-green-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
 
@@ -69,13 +68,13 @@ require_once '../../model/user.php';
             <label for="assignUsers" class="block text-gray-700 text-sm font-bold mb-1">Assign Users</label>
             <div class="relative">
                 <select name="assignUsers[]" id="assignUsers" class="block appearance-none w-64 bg-white border border-gray-300 text-gray-700 py-1 px-2 rounded leading-tight focus:outline-none focus:shadow-outline" multiple>
-                            <?php
-                                $users = User::getAll();
-                                foreach ($users as $user) {
-                                    echo "<option value='{$user['id']}'>{$user['name']}</option>";
-                                }
-                            ?>
-                        </select>
+                    <?php
+                        $users = User::getAll();
+                        foreach ($users as $user) {
+                            echo "<option value='{$user['id']}'>{$user['name']}</option>";
+                        }
+                    ?>
+                </select>
             </div>
         </div>
 
