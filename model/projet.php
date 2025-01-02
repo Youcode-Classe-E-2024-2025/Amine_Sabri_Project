@@ -11,17 +11,24 @@
         }
 
         public function create($name, $description, $userId, $visibility, $userIds) {
-            $sql = "INSERT INTO projects (name, description, created_by, visibility) VALUES (?, ?, ?, ?)";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([$name, $description, $userId, $visibility]);
-            $projectId = $this->db->lastInsertId();
-            $sqlUsers = "INSERT INTO project_user (project_id, user_id) VALUES (?, ?)";
-            $stmtUsers = $this->db->prepare($sqlUsers);
-            foreach ($userIds as $user) {
-                $stmtUsers->execute([$projectId, $user]);
+            try {
+                $sql = "INSERT INTO projects (name, description, created_by, visibility) VALUES (?, ?, ?, ?)";
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([$name, $description, $userId, $visibility]);
+
+                $projectId = $this->db->lastInsertId();
+                $sqlUsers = "INSERT INTO project_user (project_id, user_id) VALUES (?, ?)";
+                $stmtUsers = $this->db->prepare($sqlUsers);
+        
+                foreach ($userIds as $user) {
+                    $stmtUsers->execute([$projectId, $user]);
+                }
+                return true;
+            } catch (Exception $e) {
+                return $e->getMessage();
             }
-            echo "Project create";
         }
+        
         
         
         
@@ -50,7 +57,7 @@
             ]);
 
             if($delete){
-                echo "projet supprimer";
+                return $delete;
             }else{
                 echo "projet n'est pas supprimer";
             }

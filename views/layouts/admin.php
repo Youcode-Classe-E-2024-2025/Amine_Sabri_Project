@@ -15,7 +15,7 @@ require_once '../../model/projet.php';
     <header class="p-6 flex justify-between items-center shadow-lg ">
         <h1 class=" text-2xl font-bold">TaskProjet</h1>
         <div class="flex space-x-2 items-center">
-            <h2><?php echo $_SESSION["username"]?></h2>
+            <h2><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : ' ' ?></h2>
             <div class= "relative">
                 <img id="img_menu" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="30px">
                 <ul id="menu_navbar" class = "absolute border-2 border-grey-400 right-[1px] top-14 w-28 p-2 hidden">
@@ -59,7 +59,7 @@ require_once '../../model/projet.php';
                                     </p>
                                     <div class='flex justify-between items-center'>
                                         <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
-                                        <form action='deleteProject.php' method='POST' class='inline'>
+                                        <form action='../../controller/projectController.php' method='GET' class='inline'>
                                             <input type='hidden' name='id' value='{$project['id']}'>
                                             <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'><i class='bi bi-trash-fill'></i></button>
                                         </form>
