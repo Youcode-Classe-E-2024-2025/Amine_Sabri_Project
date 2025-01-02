@@ -84,7 +84,7 @@
     }
 
     $projet = new ProjetController();
-    // $projet->createProject();
+    $projet->createProject();
     $projet->upadteProjet();
     
     // ProjetController::getProjetId();

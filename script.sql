@@ -10,7 +10,6 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
@@ -21,22 +20,36 @@ CREATE TABLE projects (
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
-
-
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     project_id INT,
     name VARCHAR(255),
     status ENUM('to_do', 'in_progress', 'done'),
-    assigned_to INT,
-    category VARCHAR(250),
-    tags ENUM('urgent', 'bug', 'feature'),  
+    assigned_to INT, 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
     FOREIGN KEY (assigned_to) REFERENCES users(id)
 );
 
+CREATE TABLE tags (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name ENUM('HTML', 'CSS', 'JS', 'PHP', 'REACT JS', 'VUE JS', 'LARAVEL', 'AJAX', 'XML', 'JQUERY', 'MongoDB', 'MySQL', 'Postgres')
+);
 
+CREATE TABLE task_tag (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tag_id INT,
+    task_id INT,
+    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE, 
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
+
+CREATE TABLE category(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(500),
+    task_id INT,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
 
 CREATE TABLE project_user (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,13 +59,14 @@ CREATE TABLE project_user (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE User_task (
+CREATE TABLE user_task (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     task_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (task_id) REFERENCES tasks(id)
 );
+
 
 
 
@@ -91,3 +105,20 @@ VALUES
 (2, 1),  -- John pour Task 1 for Alpha
 (3, 2),  -- Jane pour Task 2 for Alpha
 (2, 3);  -- John pour Task 1 for Beta
+
+
+
+INSERT INTO tags (name) VALUES
+('HTML'),
+('CSS'),
+('JS'),
+('PHP'),
+('REACT JS'),
+('VUE JS'),
+('LARAVEL'),
+('AJAX'),
+('XML'),
+('JQUERY'),
+('MongoDB'),
+('MySQL'),
+('Postgres');
