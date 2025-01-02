@@ -45,7 +45,7 @@
                 foreach ($userIds as $user) {
                     $stmtUsers->execute([$id_projet, $user]);
                 }
-                echo "Project modifier ";
+                return true;
         }
         
 
@@ -71,6 +71,13 @@
             $projet = $test->fetchAll(PDO::FETCH_ASSOC);
             return $projet;
         }
+
+        public function getProjet($id){
+            $sql = "SELECT * FROM projects u  WHERE id = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
 
 
@@ -79,11 +86,11 @@
     // $project->create("Nouveau Projet" , "Ceci est un projet test" , 1 , "public", [2, 3, 4]);
 
 
-    // $name = "Updated Project Name";
+    // $name = "Project Name";
     // $description = "Updated Description";
     // $createdBy = 1;
     // $visibility = "public";
-    // $id_projet = 11; 
+    // $id_projet = 1; 
     // $userIds = [16, 4, 5]; 
     // $project->update($name, $description, $createdBy, $visibility, $id_projet, $userIds);
 

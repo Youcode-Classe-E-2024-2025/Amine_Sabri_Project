@@ -44,9 +44,49 @@
                 }
             }
         }
+
+        public function upadteProjet(){
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $name = $_POST["name"];
+                $description = $_POST["description"];
+                $create_by = $_POST["create_by"];
+                $visibility = $_POST["visibility"];
+                $id_projet = $_GET['id'];
+                $assignUsers = $_POST["assignUsers"];
+
+                if (empty(trim($name)) || empty(trim($description)) || empty(trim($create_by)) || empty(trim($visibility)) || empty($id_projet)|| (is_array($assignUsers) && empty($assignUsers))) {
+                    $_SESSION['error'] = "Tous les champs sont obligatoires.";
+                    header('Location: ../views/layouts/admin.php');
+                    exit;
+                }
+                $project = new Projet();
+
+                $isUpdate = $project->update($name,$description,$create_by,$visibility,$id_projet,$assignUsers);
+                if($isUpdate){
+                    header("Location: ../views/layouts/admin.php");
+                }
+            }
+        }
+
+
+        public static function getProjetId(){
+            if($_GET['id']){
+                $id = $_GET['id'];
+                $project = new Projet();
+                $projetId = $project->getProjet($id);
+                return $projetId;
+
+                // if($projetId){
+                //     var_dump($projetId);
+                // }
+            }
+        }
     }
 
     $projet = new ProjetController();
-    $projet->createProject();
-    $projet->deleteProjet();
+    // $projet->createProject();
+    $projet->upadteProjet();
+    
+    // ProjetController::getProjetId();
+    // $projet->deleteProjet();
 ?>
