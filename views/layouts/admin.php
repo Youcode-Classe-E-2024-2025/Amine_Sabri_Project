@@ -47,25 +47,27 @@ require_once '../../model/projet.php';
                             
                             echo "
                             <div class='bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 hover:shadow-xl transition duration-300'>
-                                <div class='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-2'>
-                                    <h2 class='text-xl font-bold mb-1 text-white'>{$project['name']}</h2>
-                                </div>
-                                <div class='p-4'>
-                                    <p class='text-gray-700 mb-2'>
-                                        <strong>Visibility:</strong> <span class='{$visibilityColor}'>" . ucfirst($project['visibility']) . "</span>
-                                    </p>
-                                    <p class='text-gray-700 mb-2'>
-                                        <strong>Description:</strong> {$project['description']}
-                                    </p>
-                                    <div class='flex justify-between items-center'>
-                                        <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
-                                        <form action='../../controller/projectController.php' method='GET' class='inline'>
-                                            <input type='hidden' name='id' value='{$project['id']}'>
-                                            <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'><i class='bi bi-trash-fill'></i></button>
-                                        </form>
+                                <a href='./todo.php?id=" . $project['id'] . "'>
+                                    <div class='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-2'>
+                                        <h2 class='text-xl font-bold mb-1 text-white'>{$project['name']}</h2>
                                     </div>
-                                </div>
-                            </div>";
+                                    <div class='p-4'>
+                                        <p class='text-gray-700 mb-2'>
+                                            <strong>Visibility:</strong> <span class='{$visibilityColor}'>" . ucfirst($project['visibility']) . "</span>
+                                        </p>
+                                        <p class='text-gray-700 mb-2'>
+                                            <strong>Description:</strong> {$project['description']}
+                                        </p>
+                                        <div class='flex justify-between items-center'>
+                                            <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
+                                            <form action='../../controller/projectController.php' method='GET' class='inline'>
+                                                <input type='hidden' name='id' value='{$project['id']}'>
+                                                <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'><i class='bi bi-trash-fill'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </a>    
+                            </div>";    
                         }
                     } else {
                         echo "<p class='text-center text-gray-500'>No projects available at the moment.</p>";
