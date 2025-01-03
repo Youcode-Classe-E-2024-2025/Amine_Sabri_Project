@@ -12,19 +12,7 @@ require_once '../../model/projet.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    <header class="p-6 flex justify-between items-center shadow-lg ">
-        <h1 class=" text-2xl font-bold">TaskProjet</h1>
-        <div class="flex space-x-2 items-center">
-            <h2><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : ' ' ?></h2>
-            <div class= "relative">
-                <img id="img_menu" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="30px">
-                <ul id="menu_navbar" class = "absolute border-2 border-grey-400 right-[1px] top-14 w-28 p-2 hidden">
-                    <li>My Profile</li>
-                    <li>Logout</li>
-                </ul>
-            </div>
-        </div>
-    </header>
+    <?php include('../includes/header.php')?>
 
     <!-- Main content -->
     <main class="container mx-auto p-6">
@@ -42,7 +30,6 @@ require_once '../../model/projet.php';
             
                     if (!empty($projects)) {
                         foreach ($projects as $project) {
-                            // Determine the text color based on visibility
                             $visibilityColor = ($project['visibility'] == 'private') ? 'text-red-600' : 'text-green-600';
                             
                             echo "
@@ -58,7 +45,7 @@ require_once '../../model/projet.php';
                                         <p class='text-gray-700 mb-2'>
                                             <strong>Description:</strong> {$project['description']}
                                         </p>
-                                        <div class='flex justify-between items-center'>
+                                        <div class=''>
                                             <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
                                             <form action='../../controller/projectController.php' method='GET' class='inline'>
                                                 <input type='hidden' name='id' value='{$project['id']}'>

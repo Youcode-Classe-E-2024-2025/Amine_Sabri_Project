@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
 <section class="container mx-auto flex flex-col md:flex-row justify-around md:items-start h-full">
         <div class="todo border-2 border-indigo-500 m-5 lg:w-full pb-4 flex flex-col items-center bg-white shadow-lg rounded-lg md:w-56 ">
             <div class="header-todo rounded-[5px,5px,5px] bg-indigo-500 text-white border-b-2 border-indigo-500 flex justify-between items-center w-full p-3">
@@ -41,5 +32,3 @@
             </div>
         </div>
     </section>
-</body>
-</html>

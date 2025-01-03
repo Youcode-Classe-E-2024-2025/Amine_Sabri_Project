@@ -10,14 +10,23 @@ require_once '../../model/user.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <main>
-        <section>
-            <form action="../../controller/TaskController.php" method="POST" class="w-[40%] mx-auto bg-white p-6 rounded-lg shadow-lg grid grid-cols-1 md:grid-cols-2 gap-4">
-                <h2 class="text-2xl font-bold mb-4 text-center col-span-1 md:col-span-2">Create Task</h2>
+    <?php include('../includes/header.php')?>
+    <main >
+        <div class=" flex justify-end mt-10 pr-6">
+                <button id="buttonAddTask" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+        </div>
 
+        <?php include('../includes/template.php')?>
+
+        <section id="modelAddTask" class=" ">
+            <form action="../../controller/TaskController.php" method="POST" class="bg-yellow-300 w-[40%] mx-auto bg-white p-6 rounded-lg shadow-lg">
+                <div id="closeModelTask" class= "flex justify-end "><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
+                <h2 class="text-2xl font-bold  text-center col-span-1 md:col-span-2">Create Task</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input type="hidden" name="project_id" value="<?php echo $_GET['id']; ?>">
 
                 <div class="mb-4">
@@ -68,9 +77,19 @@ require_once '../../model/user.php';
                 <div class="flex justify-center col-span-1 md:col-span-2">
                     <input type="submit" value="Create Task" class="bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none">
                 </div>
+            </div>
+                
             </form>
         </section>
 
     </main>
+    <script>
+        const buttonAddTask = document.querySelector('#buttonAddTask');
+        const modelAddTask = document.querySelector('#modelAddTask');
+
+        buttonAddTask.addEventListener('click',function(){
+            modelAddTask.classList.toggle('hidden')
+        })
+    </script>
 </body>
 </html>
