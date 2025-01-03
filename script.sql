@@ -122,3 +122,8 @@ INSERT INTO tags (name) VALUES
 ('MongoDB'),
 ('MySQL'),
 ('Postgres');
+
+
+
+
+

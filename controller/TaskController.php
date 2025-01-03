@@ -17,7 +17,7 @@ class TaskController{
             $task = $taskModel->create($project_id, $task_name, $status, $assigned_to, $userIds, $tagIds, $category_name);
 
             if($task){
-                echo "create task";
+                header('Location: ../views/layouts/todo.php');
             }
 
             // echo '<pre>';

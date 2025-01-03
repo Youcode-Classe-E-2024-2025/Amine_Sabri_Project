@@ -116,11 +116,46 @@ class Task {
         $tags = $test->fetchAll(PDO::FETCH_ASSOC);
         return $tags;
     }
+
+    public static function getAllTask() {
+        $database = new Database();
+        $db = $database->getConnection(); 
+        $sql = '
+            SELECT 
+                tasks.name AS task_name,
+                tasks.status AS task_status,
+                GROUP_CONCAT(DISTINCT tags.name SEPARATOR ", ") AS tag_names,
+                category.name AS category_name,
+                GROUP_CONCAT(DISTINCT users.name SEPARATOR ", ") AS working_users
+            FROM tasks
+            LEFT JOIN task_tag ON tasks.id = task_tag.task_id
+            LEFT JOIN tags ON task_tag.tag_id = tags.id
+            LEFT JOIN category ON tasks.id = category.task_id
+            LEFT JOIN user_task ON tasks.id = user_task.task_id
+            LEFT JOIN users ON user_task.user_id = users.id
+            GROUP BY tasks.id, category.name, tasks.status;
+        ';
+    
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $tasks;
+        } catch (PDOException $e) {
+            error_log("Erreur lors de l'exécution de la requête : " . $e->getMessage());
+            return [];
+        }
+    }
 }
 
 
 
 $task = new Task();
+
+// $tasks = Task::getAllTask();
+
+// var_dump($tasks);
 
 
 // create
