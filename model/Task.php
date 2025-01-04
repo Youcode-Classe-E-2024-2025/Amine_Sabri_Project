@@ -60,42 +60,35 @@ class Task {
 
     public function update($taskId, $task_name, $status, $assigned_to, $userIds, $tagIds, $category_name) {
         try {
-            // 1. Update the task details
             $sql = "UPDATE tasks SET name = ?, status = ?, assigned_to = ? WHERE id = ?";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([$task_name, $status, $assigned_to, $taskId]);
 
-            // 2. Delete existing users linked to the task (before inserting the new ones)
             $sqlDeleteUsers = "DELETE FROM user_task WHERE task_id = ?";
             $stmtDeleteUsers = $this->db->prepare($sqlDeleteUsers);
             $stmtDeleteUsers->execute([$taskId]);
 
-            // 3. Add the new users to the task
             $sqlUsers = "INSERT INTO user_task (user_id, task_id) VALUES (?, ?)";
             $stmtUsers = $this->db->prepare($sqlUsers);
             foreach ($userIds as $user) {
                 $stmtUsers->execute([$user, $taskId]);
             }
 
-            // 4. Delete existing tags linked to the task (before inserting the new ones)
             $sqlDeleteTags = "DELETE FROM task_tag WHERE task_id = ?";
             $stmtDeleteTags = $this->db->prepare($sqlDeleteTags);
             $stmtDeleteTags->execute([$taskId]);
 
-            // 5. Add the new tags to the task
             $sqlTags = "INSERT INTO task_tag (tag_id, task_id) VALUES (?, ?)";
             $stmtTags = $this->db->prepare($sqlTags);
             foreach ($tagIds as $tag) {
                 $stmtTags->execute([$tag, $taskId]);
             }
 
-            // 6. Update the category if provided
             if (!empty($category_name)) {
                 $sqlCategory = "INSERT INTO category (name, task_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE name = ?";
                 $stmtCategory = $this->db->prepare($sqlCategory);
                 $stmtCategory->execute([$category_name, $taskId, $category_name]);
             } else {
-                // Optionally delete category if no name is provided
                 $sqlDeleteCategory = "DELETE FROM category WHERE task_id = ?";
                 $stmtDeleteCategory = $this->db->prepare($sqlDeleteCategory);
                 $stmtDeleteCategory->execute([$taskId]);
