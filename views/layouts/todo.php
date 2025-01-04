@@ -2,7 +2,7 @@
 require_once '../../model/user.php';
 require_once '../../model/Task.php';
 require_once '../../model/user.php';
-
+$project_id = $_GET['id']
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +27,7 @@ require_once '../../model/user.php';
                     <div id="closeModelTask" class= "flex justify-end "><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
                     <h2 class="text-2xl mb-6 font-bold text-white text-center col-span-1 md:col-span-2"><u>CREATE TASK</u></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="hidden" name="project_id" value="<?php echo $_GET['id']; ?>">
+                    <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
 
                 <div class="">
                     <label for="name" class="block text-sm font-semibold text-white mb-2">Task Name :</label>

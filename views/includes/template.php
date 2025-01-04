@@ -7,7 +7,7 @@
             </div>
             <div id="tache" class="tache w-full mt-6 px-3">
                 <!-- todo -->
-                <?php $tasks = Task::getAllTask(); ?>
+                <?php $tasks = Task::getAllTaskForId($project_id); ?>
                 <?php if (!empty($tasks)): ?>
                     <?php foreach ($tasks as $task): ?>
                         <?php if ($task['task_status'] === 'to_do'): // Vérifier si le statut est "to_do" ?>
@@ -69,7 +69,6 @@
             <div id="doingTasks" class="doing-tasks w-full mt-6 px-3">
                 <div id="tache" class="tache w-full mt-6 px-3">
                     <!-- in_progress -->
-                    <?php $tasks = Task::getAllTask(); ?>
                     <?php if (!empty($tasks)): ?>
                         <?php foreach ($tasks as $task): ?>
                             <?php if ($task['task_status'] === 'in_progress'): // Vérifier si le statut est "in_progress" ?>
@@ -132,7 +131,6 @@
             <div id="doneTasks" class="done-tasks w-full mt-6 px-3">
                 <div id="tache" class="tache w-full mt-6 px-3">
                     <!-- done -->
-                    <?php $tasks = Task::getAllTask(); ?>
                     <?php if (!empty($tasks)): ?>
                         <?php foreach ($tasks as $task): ?>
                             <?php if ($task['task_status'] === 'done'):  ?>
