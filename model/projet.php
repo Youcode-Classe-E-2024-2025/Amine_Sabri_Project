@@ -96,9 +96,8 @@
                 $database = new Database();
                 $db = $database->getConnection();
                 
-                // الاستعلام المعدل لاختيار المشاريع المرتبطة بالمستخدم
                 $sql = "SELECT 
-                            p.id,  -- إضافة id للمشروع هنا
+                            p.id, 
                             p.name,
                             p.description,
                             p.visibility,
@@ -110,16 +109,14 @@
                         JOIN 
                             users u ON pu.user_id = u.id
                         WHERE
-                            u.name = :username  -- إضافة شرط لاختيار المشاريع التي يشارك فيها المستخدم
+                            u.name = :username 
                         GROUP BY 
                             p.id";
         
-                // إعداد الاستعلام
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':username', $username);
                 $stmt->execute();
         
-                // جلب النتائج
                 $projet = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 return $projet;
