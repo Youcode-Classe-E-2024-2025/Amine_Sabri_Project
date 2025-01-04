@@ -6,7 +6,9 @@
                 <img id="img_menu" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="30px">
                 <ul id="menu_navbar" class = "absolute border-2 border-grey-400 right-[1px] top-14 w-28 p-2 hidden">
                     <li>My Profile</li>
-                    <li>Logout</li>
+                    <form action="" method = "POST">
+                        <button>Logout</button>
+                    </form>
                 </ul>
             </div>
         </div>
