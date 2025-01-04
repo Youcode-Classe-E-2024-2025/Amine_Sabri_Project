@@ -127,3 +127,16 @@ INSERT INTO tags (name) VALUES
 
 
 
+SELECT 
+    p.name,
+    p.description ,
+    p.visibility ,
+    GROUP_CONCAT(u.name ORDER BY u.name) AS users_name
+FROM 
+    projects p
+JOIN 
+    project_user pu ON p.id = pu.project_id
+JOIN 
+    users u ON pu.user_id = u.id
+GROUP BY 
+    p.id;

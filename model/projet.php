@@ -66,7 +66,20 @@
         public static function getAllProjet(){
             $database = new Database();
             $db = $database->getConnection();
-            $sql = "SELECT * FROM projects";
+            $sql = "SELECT 
+                            p.id,
+                            p.name,
+                            p.description,
+                            p.visibility,
+                            GROUP_CONCAT(u.name ORDER BY u.name) AS users_name
+                        FROM 
+                            projects p
+                        JOIN 
+                            project_user pu ON p.id = pu.project_id
+                        JOIN 
+                            users u ON pu.user_id = u.id
+                        GROUP BY 
+                            p.id";
             $test = $db->query($sql);
             $projet = $test->fetchAll(PDO::FETCH_ASSOC);
             return $projet;
@@ -78,7 +91,47 @@
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        public static function getAllProjetForUser($username){
+            try {
+                $database = new Database();
+                $db = $database->getConnection();
+                
+                // الاستعلام المعدل لاختيار المشاريع المرتبطة بالمستخدم
+                $sql = "SELECT 
+                            p.id,  -- إضافة id للمشروع هنا
+                            p.name,
+                            p.description,
+                            p.visibility,
+                            GROUP_CONCAT(u.name ORDER BY u.name) AS users_name
+                        FROM 
+                            projects p
+                        JOIN 
+                            project_user pu ON p.id = pu.project_id
+                        JOIN 
+                            users u ON pu.user_id = u.id
+                        WHERE
+                            u.name = :username  -- إضافة شرط لاختيار المشاريع التي يشارك فيها المستخدم
+                        GROUP BY 
+                            p.id";
+        
+                // إعداد الاستعلام
+                $stmt = $db->prepare($sql);
+                $stmt->bindParam(':username', $username);
+                $stmt->execute();
+        
+                // جلب النتائج
+                $projet = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                
+                return $projet;
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                return false;
+            }
+        }
+        
     }
+
+
 
 
 

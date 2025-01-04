@@ -84,8 +84,8 @@
     }
 
     $projet = new ProjetController();
-    // $projet->createProject();
-    $projet->upadteProjet();
+    $projet->createProject();
+    // $projet->upadteProjet();
     
     // ProjetController::getProjetId();
     // $projet->deleteProjet();
