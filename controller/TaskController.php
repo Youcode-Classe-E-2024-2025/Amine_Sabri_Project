@@ -27,6 +27,25 @@ class TaskController{
         }
     }
 
+
+    public function updateTaskStatus(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $taskId = $_POST['taskId'];
+            $status = $_POST['status'];
+
+            $taskModel = new Task();
+            $task = $taskModel->updateStatustask($status,$taskId);
+
+            if($task){
+                header('Location: ../views/layouts/todo.php');
+            }else{
+                "error de modification status task";
+            }
+
+
+        }
+    }
+
     
 }
 
