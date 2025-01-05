@@ -66,6 +66,16 @@ class User{
         $users = $test->fetchAll(PDO::FETCH_ASSOC);
         return $users;
     }
+    public static function getUserParId($id) {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = "SELECT * FROM users WHERE id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $user;
+    }
 }
 
 // $insert = new User();

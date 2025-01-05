@@ -19,7 +19,7 @@ require_once '../../model/projet.php';
 <main>
     <section>
         <div class="container mx-auto p-6">
-            <h1 class="text-5xl font-bold text-center mb-8">Projects Showcase</h1>
+            <h1 class="text-5xl font-bold text-center mb-8">Projects UserShowcase</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <?php
                 if (isset($_SESSION['username'])) {

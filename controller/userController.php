@@ -54,10 +54,10 @@ class UserController {
     }
 }
 
-// $user = new UserController();
-// if (isset($_POST['action']) && $_POST['action'] === 'signup') {
-//     $user->create();
-// } elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
-//     $user->connexion();
-// }
+$user = new UserController();
+if (isset($_POST['action']) && $_POST['action'] === 'signup') {
+    $user->create();
+} elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
+    $user->connexion();
+}
 ?>
