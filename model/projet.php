@@ -85,6 +85,29 @@
             return $projet;
         }
 
+        public static function getAllProjetPublic(){
+            $database = new Database();
+            $db = $database->getConnection();
+            $sql = "SELECT 
+                            p.id,
+                            p.name,
+                            p.description,
+                            p.visibility,
+                            GROUP_CONCAT(u.name ORDER BY u.name) AS users_name
+                        FROM 
+                            projects p
+                        JOIN 
+                            project_user pu ON p.id = pu.project_id
+                        JOIN 
+                            users u ON pu.user_id = u.id
+                        WHERE p.visibility = 'public'
+                        GROUP BY 
+                            p.id";
+            $test = $db->query($sql);
+            $projet = $test->fetchAll(PDO::FETCH_ASSOC);
+            return $projet;
+        }
+
         public function getProjet($id){
             $sql = "SELECT * FROM projects u  WHERE id = ?";
             $stmt = $this->db->prepare($sql);

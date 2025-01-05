@@ -172,11 +172,18 @@ class Task {
             return [];
         }
     }
+
+    public function updateStatustask($status,$idtask){
+        $sql = "UPDATE tasks SET status = ? WHERE id = ?" ;
+        $test = $this->db->prepare($sql);
+        return $test->execute([$status,$idtask]);
+    }
 }
 
 
 
 $task = new Task();
+// $task->updateStatustask("done",9);
 
 // $tasks = Task::getAllTask();
 // $tasks = Task::getAllTaskForId(4);

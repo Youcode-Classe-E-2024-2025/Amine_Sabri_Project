@@ -11,9 +11,19 @@ require_once '../../model/projet.php';
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <?php
-    include("../includes/header.php")
-    ?>
+<header class="p-6 flex justify-between items-center shadow-lg ">
+    <h1 class="text-2xl font-bold">TaskProjet</h1>
+    <div class="flex space-x-2 items-center">
+        <div class="relative">
+            <img id="img_menu" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="30px">
+            <ul id="menu_navbar" class="absolute border-2 border-grey-400 right-[1px] top-14 w-28 p-2 hidden">
+                <li>My Profile</li>
+                <a href="../sign/signIn.html">signIn</a>
+                <a href="../sign/signUp.html">signUp</a>
+            </ul>
+        </div>
+    </div>
+</header>
 </body>
 
 <main>
@@ -22,9 +32,7 @@ require_once '../../model/projet.php';
             <h1 class="text-5xl font-bold text-center mb-8">Projects Showcase</h1>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <?php
-                if (isset($_SESSION['username'])) {
-                    $username = $_SESSION['username'];
-                    $projects = Projet::getAllProjetForUser($username);
+                    $projects = Projet::getAllProjetPublic();
 
                     if (!empty($projects)) {
                         foreach ($projects as $project) {
@@ -56,9 +64,6 @@ require_once '../../model/projet.php';
                     } else {
                         echo "<p class='text-center text-gray-500'>No projects available at the moment.</p>";
                     }
-                } else {
-                    echo "<p class='text-center text-gray-500'>Please log in to see your projects.</p>";
-                }
                 ?>
             </div>
         </div>
