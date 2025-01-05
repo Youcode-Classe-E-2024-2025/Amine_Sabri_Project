@@ -10,7 +10,13 @@
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Connexion</h2>
         <form action="http://localhost/amine_Sabri_Project/index.php?action=signIn" method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <?php
+                session_start();
+                if (empty($_SESSION['csrf_token'])) {
+                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+                }
+            ?>
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>

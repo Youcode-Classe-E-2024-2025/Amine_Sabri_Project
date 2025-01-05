@@ -11,6 +11,12 @@
         <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Sign Up</h2>
         <form action="http://localhost/amine_Sabri_Project/index.php?action=signUp" method="POST">
             
+            <?php
+            session_start();
+            if (empty($_SESSION['csrf_token'])) {
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            }
+            ?>
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
             <div class="mb-4">
