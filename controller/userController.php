@@ -8,6 +8,10 @@ class UserController {
             $email = $_POST["email"];
             $password = $_POST["password"];
 
+            if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+                die("CSRF token invalide.");
+            }
+
             if (empty(trim($name)) || empty(trim($email)) || empty(trim($password))) {
                 echo "Remplis tous les champs.";
                 return;
@@ -30,6 +34,9 @@ class UserController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = $_POST["email"];
             $password = $_POST["password"];
+            if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+                die("CSRF token invalide.");
+            }
 
             if (empty(trim($email)) || empty(trim($password))) {
                 echo "Remplis tous les champs.";
