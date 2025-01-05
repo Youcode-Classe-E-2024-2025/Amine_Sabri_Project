@@ -146,6 +146,7 @@ class Task {
         $db = $database->getConnection(); 
         $sql = '
             SELECT 
+                tasks.id,
                 tasks.name AS task_name,
                 tasks.status AS task_status,
                 GROUP_CONCAT(DISTINCT tags.name SEPARATOR ", ") AS tag_names,

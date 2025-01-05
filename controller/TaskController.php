@@ -32,12 +32,13 @@ class TaskController{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $taskId = $_POST['taskId'];
             $status = $_POST['status'];
+            $id_projet = $_POST['id_projet'];
 
             $taskModel = new Task();
             $task = $taskModel->updateStatustask($status,$taskId);
 
             if($task){
-                header('Location: ../views/layouts/todo.php');
+                header('Location: views/layouts/todo.php?id=' . $id_projet);
             }else{
                 "error de modification status task";
             }

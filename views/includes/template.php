@@ -11,10 +11,13 @@
                 <?php if (!empty($tasks)): ?>
                     <?php foreach ($tasks as $task): ?>
                         <?php if ($task['task_status'] === 'to_do'):  ?>
+                            
                             <div class="task shadow-lg rounded-lg m-4 w-[300px] bg-gray-100 p-4 transition-transform duration-300 transform hover:scale-105">
                                 <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
-                                    <a href="../layouts/editStatus.php"><i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i></a>
-                                    <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
+                                    <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
+                                </a>             
+                            <h3 class="font-semibold text-xl text-gray-800 truncate">
                                         <?= htmlspecialchars($task['task_name']); ?>
                                     </h3>
                                     <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>
@@ -71,8 +74,9 @@
                             <?php if ($task['task_status'] === 'in_progress'): ?>
                                 <div class="task shadow-lg rounded-lg m-4 w-[300px] bg-gray-100 p-4 transition-transform duration-300 transform hover:scale-105">
                                     <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
-                                    <a href=""><i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i></a>
-                                        <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                    <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
+                                        <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
+                                    </a>                                           <h3 class="font-semibold text-xl text-gray-800 truncate">
                                             <?= htmlspecialchars($task['task_name']); ?>
                                         </h3>
                                         <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>
@@ -131,8 +135,9 @@
                             <?php if ($task['task_status'] === 'done'):  ?>
                                 <div class="task shadow-lg rounded-lg m-4 w-[300px] bg-gray-100 p-4 transition-transform duration-300 transform hover:scale-105">
                                     <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
-                                        <a href="../layouts/editStatus.php"><i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i></a>
-                                        <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                    <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
+                                        <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
+                                    </a>                                            <h3 class="font-semibold text-xl text-gray-800 truncate">
                                             <?= htmlspecialchars($task['task_name']); ?>
                                         </h3>
                                         <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>

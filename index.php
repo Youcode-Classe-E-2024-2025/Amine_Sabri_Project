@@ -34,6 +34,10 @@ if (isset($_GET['action'])) {
             $task = new TaskController();
             $task->createTask();
             break;
+        case 'updateTaskStatus':
+            $task = new TaskController();
+            $task->updateTaskStatus();
+            break;
 
         // Uncomment and complete if needed
         // case 'updateTask':
