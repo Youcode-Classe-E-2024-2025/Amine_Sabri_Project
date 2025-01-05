@@ -6,26 +6,38 @@ require_once('../model/user.php');
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Graphiques avec Chart.js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
-<body>
+<body >
+    <?php include('./includes/header.php');?>
 
-<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+<h2 class = "text-center mt-[30px]">Graphiques : Distribution des Tâches, Projets et Utilisateurs</h2>
+
+<section class="flex mt-[80px]">
+    <canvas id="pieChart" style="width:100%;max-width:600px;"></canvas>
+    <canvas id="barChart" style="width:100%;max-width:600px; margin-left:50px;"></canvas>
+</section>
 
 <script>
 <?php 
-    
+    // Récupérer les données depuis PHP
     $tasks = Task::getAllTask();
     $projects = Projet::getAllProjet();
-    $Users = User::getAll();
+    $users = User::getAll();
+
     $totalTask = count($tasks); 
     $totalProjet = count($projects);
-    $totalUsers = count($Users);
-    echo "var xValues = ['Tasks', 'Projets', 'Users'];";
-    echo "var yValues = [$totalTask, $totalProjet, $totalUsers,];";
+    $totalUsers = count($users);
+
+    // Générer les données pour JavaScript
+    echo "var xValues = ['Tasks', 'Projects', 'Users'];";
+    echo "var yValues = [$totalTask, $totalProjet, $totalUsers];";
     echo "var barColors = ['#b91d47', '#00aba9', '#2b5797'];";
 ?>
-new Chart("myChart", {
+// Graphique en camembert (Pie Chart)
+new Chart("pieChart", {
     type: "pie",
     data: {
         labels: xValues,
@@ -37,7 +49,29 @@ new Chart("myChart", {
     options: {
         title: {
             display: true,
-            text: "World Wide Wine Production 2018"
+            text: "Distribution des Tâches, Projets et Utilisateurs (Camembert)"
+        }
+    }
+});
+
+// Graphique en barres (Bar Chart)
+new Chart("barChart", {
+    type: "bar",
+    data: {
+        labels: xValues,
+        datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+        }]
+    },
+    options: {
+        title: {
+            display: true,
+            text: "Distribution des Tâches, Projets et Utilisateurs (Barres)"
+        },
+        legend: { display: false },
+        scales: {
+            yAxes: [{ ticks: { beginAtZero: true } }]
         }
     }
 });

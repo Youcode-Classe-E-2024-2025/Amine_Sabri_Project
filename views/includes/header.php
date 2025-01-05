@@ -1,5 +1,12 @@
 <header class="p-6 flex justify-between items-center shadow-lg ">
     <h1 class="text-2xl font-bold">TaskProjet</h1>
+    <nav>
+        <ul class="flex space-x-5">
+            <li><a href="./layouts/admin.php">Home</a></li>
+            <li><a href="../chart.php">Statistique</a></li>
+            <li></li>
+        </ul>
+    </nav>
     <div class="flex space-x-2 items-center">
         <h2><?php echo isset($_SESSION["username"]) ? $_SESSION["username"] : ' ' ?></h2>
         <div class="relative">
