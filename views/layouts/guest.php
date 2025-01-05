@@ -18,8 +18,8 @@ require_once '../../model/projet.php';
             <img id="img_menu" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" width="30px">
             <ul id="menu_navbar" class="absolute border-2 border-grey-400 right-[1px] top-14 w-28 p-2 hidden">
                 <li>My Profile</li>
-                <a href="../sign/signIn.html">signIn</a>
-                <a href="../sign/signUp.html">signUp</a>
+                <a href="../sign/signIn.php">signIn</a>
+                <a href="../sign/signUp.php">signUp</a>
             </ul>
         </div>
     </div>

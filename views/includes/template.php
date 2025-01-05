@@ -10,7 +10,7 @@
                 <?php $tasks = Task::getAllTaskForId($project_id); ?>
                 <?php if (!empty($tasks)): ?>
                     <?php foreach ($tasks as $task): ?>
-                        <?php if ($task['task_status'] === 'to_do'): // Vérifier si le statut est "to_do" ?>
+                        <?php if ($task['task_status'] === 'to_do'):  ?>
                             <div class="task shadow-lg rounded-lg m-4 w-[300px] bg-gray-100 p-4 transition-transform duration-300 transform hover:scale-105">
                                 <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
                                     <a href="../layouts/editStatus.php"><i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i></a>
@@ -66,10 +66,9 @@
             </div>
             <div id="doingTasks" class="doing-tasks w-full mt-6 px-3">
                 <div id="tache" class="tache w-full mt-6 px-3">
-                    <!-- in_progress -->
                     <?php if (!empty($tasks)): ?>
                         <?php foreach ($tasks as $task): ?>
-                            <?php if ($task['task_status'] === 'in_progress'): // Vérifier si le statut est "in_progress" ?>
+                            <?php if ($task['task_status'] === 'in_progress'): ?>
                                 <div class="task shadow-lg rounded-lg m-4 w-[300px] bg-gray-100 p-4 transition-transform duration-300 transform hover:scale-105">
                                     <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
                                     <a href=""><i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i></a>

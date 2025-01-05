@@ -17,10 +17,10 @@ class UserController {
             $UserRegistered = $userModel->signUp($name, $email, $password);
 
             if ($UserRegistered) {
-                header("Location: views/sign/signIn.html");
+                header("Location: views/sign/signIn.php");
                 exit;
             } else {
-                header("Location: views/sign/signUp.html");
+                header("Location: views/sign/signUp.php");
                 exit;
             }
         }
@@ -47,17 +47,17 @@ class UserController {
                     echo 'not found';
                 }
             } else {
-                header("Location: views/sign/signIn.html");
+                header("Location: views/sign/signIn.php");
                 exit;
             }
         }
     }
 }
 
-$user = new UserController();
-if (isset($_POST['action']) && $_POST['action'] === 'signup') {
-    $user->create();
-} elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
-    $user->connexion();
-}
+// $user = new UserController();
+// if (isset($_POST['action']) && $_POST['action'] === 'signup') {
+//     $user->create();
+// } elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
+//     $user->connexion();
+// }
 ?>

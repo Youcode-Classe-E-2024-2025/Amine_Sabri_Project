@@ -6,6 +6,15 @@ include_once __DIR__ . '/controller/TaskController.php';
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     switch ($action) {
+
+        case 'signUp':
+            $user = new UserController();
+            $user->create();
+            break;
+        case 'signIn':
+            $user = new UserController();
+            $user->connexion();
+            break;
         case 'createProjet':
             $projet = new ProjetController();
             $projet->createProject();
