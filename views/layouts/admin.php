@@ -47,7 +47,7 @@ require_once '../../model/projet.php';
                                         </p>
                                         <div class=''>
                                             <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'><i class='bi bi-pencil-square'></i></a>
-                                            <form action='../../controller/projectController.php' method='GET' class='inline'>
+                                            <form action='http://localhost/amine_Sabri_Project/index.php?action=deleteProjet' method='POST' class='inline'>
                                                 <input type='hidden' name='id' value='{$project['id']}'>
                                                 <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'><i class='bi bi-trash-fill'></i></button>
                                             </form>
@@ -74,7 +74,7 @@ require_once '../../model/projet.php';
 
 
         <section id="ModelProjet" class="fixed top-32 left-[34%] hidden">
-            <form action="../../controller/projectController.php" method="POST" class="relative bg-yellow-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
+            <form action="http://localhost/amine_Sabri_Project/index.php?action=createProjet" method="POST" class="relative bg-yellow-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
                 <div id="closeModelProjet" class= "flex justify-end w-fit mb-[22px]  absolute left-[92%] bottom-[89%]"><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
                 <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Create New Item</h2>
                 <div class = "grid grid-cols-2 space-x-5">

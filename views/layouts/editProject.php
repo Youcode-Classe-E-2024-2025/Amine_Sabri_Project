@@ -15,7 +15,7 @@ require_once '../../model/user.php';
         <?php
             $users = ProjetController::getProjetId(); 
         ?>
-    <form action="../../controller/projectController.php?id=<?= $users['id'] ?>" method="POST" class="relative bg-green-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
+    <form action="http://localhost/amine_Sabri_Project/index.php?action=updateProjet&id=<?= $users['id'] ?>" method="POST" class="relative bg-green-500 shadow-md rounded-lg w-[400px] px-8 pt-6 pb-8 mb-4">
 
         <div id="closeModelProjet" class="flex justify-end w-fit mb-[22px] absolute left-[92%] bottom-[89%]">
             <i class="bi bi-x-lg cursor-pointer text-2xl"></i>

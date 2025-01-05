@@ -17,10 +17,10 @@ class UserController {
             $UserRegistered = $userModel->signUp($name, $email, $password);
 
             if ($UserRegistered) {
-                header("Location: ../views/sign/signIn.html");
+                header("Location: views/sign/signIn.html");
                 exit;
             } else {
-                header("Location: ../views/sign/signUp.html");
+                header("Location: views/sign/signUp.html");
                 exit;
             }
         }
@@ -40,24 +40,24 @@ class UserController {
             $user = $userModel->signIn($email, $password);
             if ($user) {    
                 if($user['role'] == 'chief'){
-                    header("Location: ../views/layouts/admin.php");
+                    header("Location: views/layouts/admin.php");
                 }elseif($user['role'] == 'user'){
-                    header("Location: ../views/layouts/user.php");
+                    header("Location: views/layouts/user.php");
                 }else{
-                    header("Location: ../index.php");
+                    echo 'not found';
                 }
             } else {
-                header("Location: ../views/sign/signIn.html");
+                header("Location: views/sign/signIn.html");
                 exit;
             }
         }
     }
 }
 
-$user = new UserController();
-if (isset($_POST['action']) && $_POST['action'] === 'signup') {
-    $user->create();
-} elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
-    $user->connexion();
-}
+// $user = new UserController();
+// if (isset($_POST['action']) && $_POST['action'] === 'signup') {
+//     $user->create();
+// } elseif (isset($_POST['action']) && $_POST['action'] === 'signin') {
+//     $user->connexion();
+// }
 ?>
