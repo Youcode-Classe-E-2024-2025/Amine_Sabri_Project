@@ -17,7 +17,7 @@ $project_id = $_GET['id']
     <?php include('../includes/header.php')?>
     <main >
         <div class=" flex justify-end mt-10 pr-6">
-                <button id="buttonAddTask" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+                <button id="buttonAddTask" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Task</button>
         </div>
 
         <?php include('../includes/template.php')?>
