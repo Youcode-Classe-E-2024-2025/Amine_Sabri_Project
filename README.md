@@ -49,4 +49,7 @@ Une application web conçue pour améliorer la gestion des projets, des équipes
 1. **Cloner le dépôt :**
    ```bash
    git clone https://github.com/Youcode-Classe-E-2024-2025/Amine_Sabri_Project
+
+   ![image](https://github.com/user-attachments/assets/3d8a2b43-ee98-43e8-85a9-84fd899c17e3)
+
    
