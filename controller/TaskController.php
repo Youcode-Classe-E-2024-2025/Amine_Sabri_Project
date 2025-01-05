@@ -1,5 +1,5 @@
 <?php
-require_once '../model/Task.php';
+require_once 'model/Task.php';
 
 
 class TaskController{
@@ -17,7 +17,7 @@ class TaskController{
             $task = $taskModel->create($project_id, $task_name, $status, $assigned_to, $userIds, $tagIds, $category_name);
 
             if($task){
-                header('Location: ../views/layouts/todo.php');
+                header('Location: views/layouts/todo.php?id='. $project_id );
             }
 
             // echo '<pre>';
@@ -49,6 +49,6 @@ class TaskController{
     
 }
 
-$crete = new TaskController();
-$crete->createTask();
+// $crete = new TaskController();
+// $crete->createTask();
 ?>

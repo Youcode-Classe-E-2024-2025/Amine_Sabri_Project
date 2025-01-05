@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/controller/userController.php';
 include_once __DIR__ . '/controller/projectController.php';
+include_once __DIR__ . '/controller/TaskController.php';
 
 if(isset($_GET['action'])){
     $action = $_GET['action'];
@@ -20,6 +21,15 @@ if(isset($_GET['action'])){
         case 'deleteProjet':
             $projet = new ProjetController();
             $projet->deleteProjet();
+        case 'createTask':
+            $projet = new TaskController();
+            $projet->createTask();
+        // case 'updateProjet':
+        //     $projet = new TaskController();
+        //     $projet->updateTaskStatus();
+        // case 'deleteProjet':
+        //     $projet = new TaskController();
+        //     $projet->deleteProjet();
     }
 }
 ?>

@@ -23,7 +23,7 @@ $project_id = $_GET['id']
         <?php include('../includes/template.php')?>
 
         <section id="modelAddTask" class=" fixed top-24 left-[31%] hidden" >
-                <form action="../../controller/TaskController.php" method="POST" class="bg-gray-700 mx-auto bg-white p-6 rounded-lg shadow-lg">
+                <form action="http://localhost/amine_Sabri_Project/index.php?action=createTask" method="POST" class="bg-gray-700 mx-auto bg-white p-6 rounded-lg shadow-lg">
                     <div id="closeModelTask" class= "flex justify-end "><i class="bi bi-x-lg cursor-pointer text-2xl "></i></div>
                     <h2 class="text-2xl mb-6 font-bold text-white text-center col-span-1 md:col-span-2"><u>CREATE TASK</u></h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
