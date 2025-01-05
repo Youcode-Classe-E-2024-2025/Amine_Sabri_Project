@@ -3,27 +3,46 @@ include_once __DIR__ . '/controller/userController.php';
 include_once __DIR__ . '/controller/projectController.php';
 include_once __DIR__ . '/controller/TaskController.php';
 
-if(isset($_GET['action'])){
+if (isset($_GET['action'])) {
     $action = $_GET['action'];
-    switch($action){
+    switch ($action) {
         case 'createProjet':
             $projet = new ProjetController();
             $projet->createProject();
+            break;
+
         case 'updateProjet':
             $projet = new ProjetController();
-            $projet->upadteProjet();
+            $projet->upadteProjet(); 
+            break;
+
         case 'deleteProjet':
             $projet = new ProjetController();
             $projet->deleteProjet();
+            break;
+
         case 'createTask':
-            $projet = new TaskController();
-            $projet->createTask();
-        // case 'updateProjet':
-        //     $projet = new TaskController();
-        //     $projet->updateTaskStatus();
-        // case 'deleteProjet':
-        //     $projet = new TaskController();
-        //     $projet->deleteProjet();
+            $task = new TaskController();
+            $task->createTask();
+            break;
+
+        // Uncomment and complete if needed
+        // case 'updateTask':
+        //     $task = new TaskController();
+        //     $task->updateTaskStatus();
+        //     break;
+
+        // case 'deleteTask':
+        //     $task = new TaskController();
+        //     $task->deleteTask();
+        //     break;
+
+        default:
+            header("Location: ./views/guest.php");
+            exit();
     }
+} else {
+    header("Location: ./views/layouts/guest.php");
+    exit();
 }
 ?>
