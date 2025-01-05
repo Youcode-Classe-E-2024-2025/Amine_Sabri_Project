@@ -38,7 +38,7 @@ if (isset($_GET['action'])) {
         //     break;
 
         default:
-            header("Location: ./views/guest.php");
+            header("Location: ./404.php");
             exit();
     }
 } else {
