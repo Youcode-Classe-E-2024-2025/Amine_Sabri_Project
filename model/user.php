@@ -61,7 +61,7 @@ class User{
     public static function getAll() {
         $database = new Database();
         $db = $database->getConnection();
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT u.*, r.name AS role_name FROM users u JOIN roles r ON r.id = u.role_id"; 
         $test = $db->query($sql);
         $users = $test->fetchAll(PDO::FETCH_ASSOC);
         return $users;

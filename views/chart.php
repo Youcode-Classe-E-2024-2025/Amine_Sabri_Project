@@ -79,30 +79,6 @@ require_once('../model/user.php');
     });
     </script>
 
-    <script>
-        // Gestion de l'affichage du menu utilisateur
-        const menu_navbar = document.querySelector("#menu_navbar");
-        const img_menu = document.querySelector("#img_menu");
-        const modelProjet = document.querySelector("#ModelProjet");
-        const buttonAddProjet = document.querySelector("#buttonAddProjet");
-        const closeModelProjet = document.querySelector("#closeModelProjet");
-
-        if (img_menu) {
-            img_menu.addEventListener('click', function() {
-                menu_navbar.classList.toggle("hidden");
-            });
-        }
-        if (closeModelProjet) {
-            closeModelProjet.addEventListener('click', function() {
-                modelProjet.classList.toggle("hidden");
-            });
-        }
-        if (buttonAddProjet) {
-            buttonAddProjet.addEventListener('click', function() {
-                modelProjet.classList.toggle("hidden");
-            });
-        }
-    </script>
-
+    
 </body>
 </html>

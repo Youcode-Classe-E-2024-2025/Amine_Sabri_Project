@@ -15,6 +15,14 @@ if (isset($_GET['action'])) {
             $user = new UserController();
             $user->connexion();
             break;
+        case 'updateUser':
+            $user = new UserController();
+            $user->update();
+            break;
+        case 'deleteUser':
+            $user = new UserController();
+            $user->deleteUser();
+            break;
         case 'createProjet':
             $projet = new ProjetController();
             $projet->createProject();

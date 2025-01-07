@@ -67,7 +67,7 @@ class UserController {
             $role_id = $_POST['role_id'];
 
 
-            if(empty(trim($user_id)) || empty(trim($name)) || empty(trim($email)) || empty(trim($password)) || empty(trim($role_id))){
+            if(empty(trim($user_id)) || empty(trim($name)) || empty(trim($email))  || empty(trim($role_id))){
                 echo  'Enter les inputs ';
                 return ;
             }
@@ -76,10 +76,29 @@ class UserController {
             $update = $modelUser->UpdateUser($user_id,$name,$email,$password,$role_id);
 
             if($update){
-                header();
+                header('Location: views/layouts/manager.php');
             }
         }
     }
+
+   
+
+    public function deleteUser() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['user_id'])) {
+                $userId = $_POST['user_id'];
+                $userModel = new User();
+                $result = $userModel->deleteUser($userId);
+                if ($result) {
+                    header("Location: views/layouts/manager.php");
+                    exit();
+                } else {
+                    echo "An error occurred while deleting the user.";
+                }
+            }
+        }
+    }
+    
 }
 
 // $user = new UserController();
