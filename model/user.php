@@ -110,10 +110,8 @@ class User{
             $test = $this->db->prepare($sql);
             $delete = $test->execute([$id]);
             if($delete){
-                echo 'user delete';
                 return true;
             }else{
-                echo 'error delete';
                 return false;
             }
         }catch (PDOException $e) {

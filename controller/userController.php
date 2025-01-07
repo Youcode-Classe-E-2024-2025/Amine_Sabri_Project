@@ -57,6 +57,29 @@ class UserController {
             }
         }
     }
+
+    public function update(){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $user_id = $_POST['user_id'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $role_id = $_POST['role_id'];
+
+
+            if(empty(trim($user_id)) || empty(trim($name)) || empty(trim($email)) || empty(trim($password)) || empty(trim($role_id))){
+                echo  'Enter les inputs ';
+                return ;
+            }
+
+            $modelUser = new User();
+            $update = $modelUser->UpdateUser($user_id,$name,$email,$password,$role_id);
+
+            if($update){
+                header();
+            }
+        }
+    }
 }
 
 // $user = new UserController();
