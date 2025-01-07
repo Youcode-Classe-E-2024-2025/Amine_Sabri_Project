@@ -4,7 +4,7 @@
     $userConect = $_SESSION["user_id"];
     $user = User::getUserParId($userConect);
 
-    if ($user && $user['role'] == 'chief') { 
+    if ($user && $user['role_id'] == '1') { 
         echo '
         <nav>
             <ul class="flex space-x-5">

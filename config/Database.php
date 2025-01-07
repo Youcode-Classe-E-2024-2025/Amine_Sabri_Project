@@ -3,7 +3,7 @@
 class Database {
     private $pdo;
     private $host = 'localhost';
-    private $dbname = 'projetTask';
+    private $dbname = 'projetTasks';
     private $username = 'root'; 
     private $password = '';
 

@@ -44,9 +44,9 @@ class UserController {
             $userModel = new User();
             $user = $userModel->signIn($email, $password);
             if ($user) {    
-                if($user['role'] == 'chief'){
+                if($user['role_id'] == '1'){
                     header("Location: views/layouts/admin.php");
-                }elseif($user['role'] == 'user'){
+                }elseif($user['role_id'] == '3'){
                     header("Location: views/layouts/user.php");
                 }else{
                     echo 'not found';

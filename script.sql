@@ -2,13 +2,34 @@ create DATABASE projetTask;
 
 use projetTask
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(255) UNIQUE,
-    password VARCHAR(255),
-    role ENUM('chief', 'user', 'guest') DEFAULT 'user',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(100) NOT NULL,      
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,    
+    role_id INT,                    
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    FOREIGN KEY (role_id) REFERENCES roles(id)  
 );
+
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    name VARCHAR(50) UNIQUE NOT NULL  
+);
+
+CREATE TABLE permissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
+);
+
+CREATE TABLE role_permissions (
+    role_id INT NOT NULL, 
+    permission_id INT NOT NULL, 
+    PRIMARY KEY (role_id, permission_id),
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
+);
+
+
 
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -17,8 +38,9 @@ CREATE TABLE projects (
     created_by INT,
     visibility ENUM('public', 'private'),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (created_by) REFERENCES users(id)
+    FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -36,6 +58,7 @@ CREATE TABLE tags (
     name ENUM('HTML', 'CSS', 'JS', 'PHP', 'REACT JS', 'VUE JS', 'LARAVEL', 'AJAX', 'XML', 'JQUERY', 'MongoDB', 'MySQL', 'Postgres')
 );
 
+
 CREATE TABLE task_tag (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tag_id INT,
@@ -44,6 +67,7 @@ CREATE TABLE task_tag (
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
 
+
 CREATE TABLE category(
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(500),
@@ -51,20 +75,22 @@ CREATE TABLE category(
     FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
 
+
 CREATE TABLE project_user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     project_id INT NOT NULL,
     user_id INT NOT NULL,
-    FOREIGN KEY (project_id) REFERENCES projects(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 CREATE TABLE user_task (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     task_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
 
 

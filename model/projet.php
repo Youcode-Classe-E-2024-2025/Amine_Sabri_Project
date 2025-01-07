@@ -168,5 +168,5 @@
     // $project->update($name, $description, $createdBy, $visibility, $id_projet, $userIds);
 
 
-    // $project->delete(10);
+    // $project->delete(3);
 ?>

@@ -76,9 +76,58 @@ class User{
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         return $user;
     }
+
+    public function UpdateUser($id, $name, $email, $password, $role_id) {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "UPDATE users SET name = ?, email = ?, role_id = ?, password = ? WHERE id = ?";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $updateUser = $stmt->execute([
+                $name,
+                $email,
+                $role_id,
+                $hashPassword,
+                $id
+            ]);
+
+            if ($updateUser) {
+                echo "Mise à jour réussie.";
+                return true;
+            } else {
+                echo "Échec de la mise à jour.";
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Erreur lors de la mise à jour de l'utilisateur : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteUser($id){
+        $sql = 'DELETE FROM users WHERE id = ?';
+
+        try{
+            $test = $this->db->prepare($sql);
+            $delete = $test->execute([$id]);
+            if($delete){
+                echo 'user delete';
+                return true;
+            }else{
+                echo 'error delete';
+                return false;
+            }
+        }catch (PDOException $e) {
+            echo "Erreur lors de la supprision de l'utilisateur : " . $e->getMessage();
+            return false;
+        }
+        
+    }
+    
 }
 
-// $insert = new User();
+$user = new User();
+$user->deleteUser(2);
+// $user->UpdateUser(1, 'Amine', 'amine@gmail.com', '123456', 2);
 // $insert->signUp("user","user@gmail.com","123456");
 // $insert->signIn("user@gmail.com","123456");
 
