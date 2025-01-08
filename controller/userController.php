@@ -59,11 +59,12 @@ class UserController {
     }
 
     public function update(){
+        $isPermission = new Auth();
+        $isPermission->checkPerm('update_user');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $user_id = $_POST['user_id'];
             $name = $_POST['name'];
             $email = $_POST['email'];
-            $password = $_POST['password'];
             $role_id = $_POST['role_id'];
 
 
@@ -73,7 +74,7 @@ class UserController {
             }
 
             $modelUser = new User();
-            $update = $modelUser->UpdateUser($user_id,$name,$email,$password,$role_id);
+            $update = $modelUser->UpdateUser($user_id,$name,$email,$role_id);
 
             if($update){
                 header('Location: views/layouts/manager.php');
@@ -84,6 +85,8 @@ class UserController {
    
 
     public function deleteUser() {
+        $isPermission = new Auth();
+        $isPermission->checkPerm('delete_user');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['user_id'])) {
                 $userId = $_POST['user_id'];

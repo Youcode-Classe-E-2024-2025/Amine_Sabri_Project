@@ -2,6 +2,7 @@
 include_once __DIR__ . '/controller/userController.php';
 include_once __DIR__ . '/controller/projectController.php';
 include_once __DIR__ . '/controller/TaskController.php';
+include_once __DIR__ . '/controller/roleController.php';
 
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
@@ -45,6 +46,10 @@ if (isset($_GET['action'])) {
         case 'updateTaskStatus':
             $task = new TaskController();
             $task->updateTaskStatus();
+            break;
+        case 'createRole':
+            $task = new RoleController;
+            $task->createRoleAction();
             break;
 
         // Uncomment and complete if needed

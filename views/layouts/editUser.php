@@ -46,13 +46,7 @@ if (isset($_GET['id'])) {
                     <label for="email" class="block text-gray-600 font-medium mb-2">Email</label>
                     <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200" placeholder="Entrer l'email" value="<?= htmlspecialchars($user['email']); ?>" required />
                 </div>
-                <!-- Mot de passe -->
-                <div class="mb-4">
-                    <label for="password" class="block text-gray-600 font-medium mb-2">Mot de passe</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200" placeholder="Entrer le mot de passe" />
-                    <small class="text-gray-500">Laissez vide pour garder le mot de passe actuel.</small>
-                </div>
-
+            </div>
                 <!-- Rôle -->
                 <div class="mb-4">
                     <label for="role_id" class="block text-gray-600 font-medium mb-2">Rôle</label>
@@ -68,7 +62,6 @@ if (isset($_GET['id'])) {
                         <?php endforeach; ?>
                     </select>
                 </div>
-            </div>
             <!-- Bouton -->
             <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none">
                 Mettre à jour

@@ -43,6 +43,7 @@ class User{
         
         $_SESSION["username"] = $user["name"];
         $_SESSION["user_id"] = $user["id"];
+        $_SESSION["role_id"] = $user["role_id"];
 
         if ($user) {
             if (password_verify($password, $user['password'])) {
@@ -77,16 +78,14 @@ class User{
         return $user;
     }
 
-    public function UpdateUser($id, $name, $email, $password, $role_id) {
-        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "UPDATE users SET name = ?, email = ?, role_id = ?, password = ? WHERE id = ?";
+    public function UpdateUser($id, $name, $email, $role_id) {
+        $sql = "UPDATE users SET name = ?, email = ?, role_id = ? WHERE id = ?";
         try {
             $stmt = $this->db->prepare($sql);
             $updateUser = $stmt->execute([
                 $name,
                 $email,
                 $role_id,
-                $hashPassword,
                 $id
             ]);
 

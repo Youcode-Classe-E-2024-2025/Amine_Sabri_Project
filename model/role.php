@@ -9,45 +9,78 @@ class Role {
         $this->db = $database->getConnection();
     }
 
-    public function createRole($name) {
+    public function createRole($name, $permissions) {
+        $name = htmlspecialchars(trim($name));
         $sql = 'INSERT INTO roles (name) VALUES (?)';
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$name]);
+        $stmt->execute([$name]);
+
+        $roleId = $this->db->lastInsertId();
+
+        if (!empty($permissions)) {
+            foreach ($permissions as $permissionId) {
+                $permissionId = (int)$permissionId;
+                $sql = 'INSERT INTO role_permissions (role_id, permission_id) VALUES (?, ?)';
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute([$roleId, $permissionId]);
+            }
+        }
+
+        return $roleId;
     }
 
-    public function updateRole($id, $name) {
-        $sql = 'UPDATE roles SET name = ? WHERE id = ?';
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$name, $id]);
-    }
-
-    public function deleteRole($id) {
-        $sql = 'DELETE FROM roles WHERE id = ?';
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$id]);
-    }
-
-    public static function getAllRoles() {
+    public static function getPermissions() {
         $database = new Database();
-        $db = $database->getConnection();
-
-        $sql = 'SELECT * FROM roles';
+        $db = $database->getConnection(); 
+        $sql = 'SELECT * FROM permissions';
         $stmt = $db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getRoleById($id) {
-        $sql = 'SELECT * FROM roles WHERE id = ?';
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
+
+    
+
+    
+
+    // public function createRole($name) {
+    //     $sql = 'INSERT INTO roles (name) VALUES (?)';
+    //     $stmt = $this->db->prepare($sql);
+    //     return $stmt->execute([$name]);
+    // }
+
+    // public function updateRole($id, $name) {
+    //     $sql = 'UPDATE roles SET name = ? WHERE id = ?';
+    //     $stmt = $this->db->prepare($sql);
+    //     return $stmt->execute([$name, $id]);
+    // }
+
+    // public function deleteRole($id) {
+    //     $sql = 'DELETE FROM roles WHERE id = ?';
+    //     $stmt = $this->db->prepare($sql);
+    //     return $stmt->execute([$id]);
+    // }
+
+    // public static function getAllRoles() {
+    //     $database = new Database();
+    //     $db = $database->getConnection();
+
+    //     $sql = 'SELECT * FROM roles';
+    //     $stmt = $db->query($sql);
+    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    // public function getRoleById($id) {
+    //     $sql = 'SELECT * FROM roles WHERE id = ?';
+    //     $stmt = $this->db->prepare($sql);
+    //     $stmt->execute([$id]);
+    //     return $stmt->fetch(PDO::FETCH_ASSOC);
+    // }
 }
 
 
-$role = new Role();
+// $role = new Role();
 
-$roles = $role->getAllRoles();
+// $roles = $role->getAllRoles();
 
 // var_dump($roles);
 

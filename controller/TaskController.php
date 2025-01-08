@@ -1,9 +1,12 @@
 <?php
 require_once 'model/Task.php';
+require_once 'core/Auth.php';
 
 
 class TaskController{
     public function createTask(){
+        $isPermission = new Auth();
+        $isPermission->checkPerm('create_task');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $project_id = $_POST['project_id'];
             $task_name = $_POST['name'];
@@ -12,6 +15,7 @@ class TaskController{
             $userIds = $_POST['assignUsers'];
             $tagIds = $_POST['assignTags'];
             $category_name = $_POST['category'];
+            $_SESSION['projet_id'] = $project_id ;
 
             $taskModel = new Task();
             $task = $taskModel->create($project_id, $task_name, $status, $assigned_to, $userIds, $tagIds, $category_name);
@@ -29,6 +33,8 @@ class TaskController{
 
 
     public function updateTaskStatus(){
+        $isPermission = new Auth();
+        $isPermission->checkPerm('update_tas');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $taskId = $_POST['taskId'];
             $status = $_POST['status'];

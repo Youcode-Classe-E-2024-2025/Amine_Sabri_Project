@@ -2,7 +2,15 @@
 require_once '../../model/user.php';
 require_once '../../model/Task.php';
 require_once '../../model/user.php';
-$project_id = $_GET['id']
+$project_id = $_GET['id'];
+
+
+if (isset($_SESSION['message'])) {
+    echo '<div id="alert-message" class="bg-red-100 border-l-4 flex justify-center fixed top-24 left-[34%] border-red-500 text-red-700 p-4 mb-4 rounded-lg shadow-lg transition-all" role="alert">
+            <p class="font-medium">' . $_SESSION['message'] . '</p>
+          </div>';
+    unset($_SESSION['message']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,6 +127,20 @@ $project_id = $_GET['id']
         closeModelTask.addEventListener('click',function(){
             modelAddTask.classList.toggle('hidden')
         })
+
+        window.onload = function() {
+        const alertMessage = document.getElementById('alert-message');
+        
+        if (alertMessage) {
+            setTimeout(function() {
+                alertMessage.classList.add('opacity-0'); 
+                alertMessage.classList.add('transition-opacity');
+                setTimeout(function() {
+                    alertMessage.remove();
+                }, 300);
+            }, 2000);
+        }
+    };
     </script>
 </body>
 </html>

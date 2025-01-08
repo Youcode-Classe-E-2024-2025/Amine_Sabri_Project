@@ -3,6 +3,8 @@
 
     class ProjetController{
         public function createProject() {
+            $isPermission = new Auth();
+            $isPermission->checkPerm('create_project');
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 session_start();
         
@@ -33,6 +35,8 @@
         }
 
         public function deleteProjet(){
+            $isPermission = new Auth();
+            $isPermission->checkPerm('delete_project');
             if($_SERVER["REQUEST_METHOD"] == 'POST'){
                     $getProjetId = $_POST['id'];
                     $project = new Projet();
@@ -44,6 +48,8 @@
         }
 
         public function upadteProjet(){
+            $isPermission = new Auth();
+            $isPermission->checkPerm('update_project');
             if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $name = $_POST["name"];
                 $description = $_POST["description"];
