@@ -17,8 +17,8 @@ require_once('../model/user.php');
 
     <h2 class="text-center mt-[30px]">Graphiques : Distribution des Tâches, Projets et Utilisateurs</h2>
 
-    <section class="flex mt-[80px] justify-center space-x-10">
-        <canvas id="pieChart" style="width:100%;max-width:600px;"></canvas>
+    <section class="flex mt-[80px] justify-between">
+        <canvas id="pieChart"  style="width:100%;max-width:600px;"></canvas>
         <canvas id="barChart" style="width:100%;max-width:600px;"></canvas>
     </section>
 

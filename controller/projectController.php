@@ -36,6 +36,8 @@
 
         public function deleteProjet(){
             $isPermission = new Auth();
+            $isPermission->checkPerm('_project');
+            $isPermission = new Auth();
             $isPermission->checkPerm('delete_project');
             if($_SERVER["REQUEST_METHOD"] == 'POST'){
                     $getProjetId = $_POST['id'];

@@ -26,16 +26,22 @@ if (isset($_SESSION['message'])) {
 
     <!-- Main content -->
     <main class="container mx-auto p-6">
-
-    <?php 
-    if ($auth->hasPermission('create_project')) {
-        echo '
-            <div class=" flex justify-end">
-                <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
-            </div>
-        ';
-    }
-    ?>
+    <div class= "flex justify-between items-center">
+        <?php 
+        if ($auth->hasPermission('create_project')) {
+            echo '
+                <div class=" flex justify-end">
+                    <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+                </div>
+            ';
+        }
+        ?>
+<a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
+   class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+   Détail sur Projet
+</a>        
+        
+    </div>
 
 <section>
     <div class="container mx-auto p-6">
@@ -186,6 +192,7 @@ if (isset($_SESSION['message'])) {
             }, 2000);
         }
     };
+
 
     </script>
 </body>
