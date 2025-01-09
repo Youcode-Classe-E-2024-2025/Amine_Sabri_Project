@@ -1,6 +1,8 @@
 <?php
 require_once '../../model/user.php';
 require_once '../../model/projet.php';
+require_once '../../core/Auth.php';
+$auth = new Auth();
 
 
 if (isset($_SESSION['message'])) {
@@ -24,10 +26,16 @@ if (isset($_SESSION['message'])) {
 
     <!-- Main content -->
     <main class="container mx-auto p-6">
-        <div class=" flex justify-end">
-            <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
-        </div>
 
+    <?php 
+    if ($auth->hasPermission('create_project')) {
+        echo '
+            <div class=" flex justify-end">
+                <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+            </div>
+        ';
+    }
+    ?>
 
         <section>
             <div class="container mx-auto p-6">
