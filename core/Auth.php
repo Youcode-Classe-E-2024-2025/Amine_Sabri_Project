@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/Database.php';
-session_start();
+// session_start();
 class Auth {
 
     private $db;
@@ -33,13 +33,15 @@ class Auth {
             header('Location: views/layouts/unauthorized.php');
             exit();
         }
-
+    
         $permissions = $this->permParId($_SESSION['role_id']);
-        $project_id = $_SESSION['projet_id'];
+
         if (!in_array($perm, $permissions)) {
             $_SESSION['message'] = 'You do not have permission to access this resource.';
-            header('Location: views/layouts/todo.php?id='. $project_id );
+            $currentPage = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'views/layouts/dashboard.php';
+            header('Location: ' . $currentPage);
             exit();
         }
     }
+    
 }
