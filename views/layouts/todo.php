@@ -2,6 +2,8 @@
 require_once '../../model/user.php';
 require_once '../../model/Task.php';
 require_once '../../model/user.php';
+require_once '../../core/Auth.php';
+$auth = new Auth();
 $project_id = $_GET['id'];
 
 
@@ -27,13 +29,12 @@ if (isset($_SESSION['message'])) {
 
 
     <?php 
-    $userConect = $_SESSION["user_id"];
-    $user = User::getUserParId($userConect);
-
-    if ($user && $user['role_id'] == '1') { 
+    if ($auth->hasPermission('create_task')) {
         echo '
-        <div class=" flex justify-end mt-10 pr-6">
-                <button id="buttonAddTask" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Task</button>
+        <div class="flex justify-end mt-10 pr-6">
+            <button id="buttonAddTask" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+                <i class="bi bi-plus-circle mr-2"></i>Ajouter Task
+            </button>
         </div>
         ';
     }
