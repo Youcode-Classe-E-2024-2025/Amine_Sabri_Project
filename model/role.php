@@ -37,46 +37,44 @@ class Role {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function updateRolePermissions($roleId, $permissions) {
+        try {
+            $this->db->beginTransaction();
 
+            $sqlDelete = 'DELETE FROM role_permissions WHERE role_id = ?';
+            $stmtDelete = $this->db->prepare($sqlDelete);
+            $stmtDelete->execute([$roleId]);
+
+            $sqlInsert = 'INSERT INTO role_permissions (role_id, permission_id) VALUES (?, ?)';
+            $stmtInsert = $this->db->prepare($sqlInsert);
+
+            foreach ($permissions as $permissionId) {
+                $permissionId = (int)$permissionId; 
+                $stmtInsert->execute([$roleId, $permissionId]);
+            }
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
     
 
     
 
-    // public function createRole($name) {
-    //     $sql = 'INSERT INTO roles (name) VALUES (?)';
-    //     $stmt = $this->db->prepare($sql);
-    //     return $stmt->execute([$name]);
-    // }
-
-    // public function updateRole($id, $name) {
-    //     $sql = 'UPDATE roles SET name = ? WHERE id = ?';
-    //     $stmt = $this->db->prepare($sql);
-    //     return $stmt->execute([$name, $id]);
-    // }
-
-    // public function deleteRole($id) {
-    //     $sql = 'DELETE FROM roles WHERE id = ?';
-    //     $stmt = $this->db->prepare($sql);
-    //     return $stmt->execute([$id]);
-    // }
-
-    // public static function getAllRoles() {
-    //     $database = new Database();
-    //     $db = $database->getConnection();
-
-    //     $sql = 'SELECT * FROM roles';
-    //     $stmt = $db->query($sql);
-    //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // public function getRoleById($id) {
-    //     $sql = 'SELECT * FROM roles WHERE id = ?';
-    //     $stmt = $this->db->prepare($sql);
-    //     $stmt->execute([$id]);
-    //     return $stmt->fetch(PDO::FETCH_ASSOC);
-    // }
+   
 }
 
+$role = new Role();
+$roleId = 3; 
+$newPermissions = [1]; 
+
+if ($role->updateRolePermissions($roleId, $newPermissions)) {
+    echo "Les permissions pour le rôle ID $roleId ont été mises à jour avec succès.";
+} else {
+    echo "Une erreur s'est produite lors de la mise à jour des permissions.";
+}
 
 // $role = new Role();
 
