@@ -78,6 +78,7 @@ require_once('../model/user.php');
         }
     });
     </script>
+    <script src="./assets/js/main.js"></script>
 
     
 </body>

@@ -1,6 +1,8 @@
 <?php
 require_once '../../model/user.php';
 require_once '../../model/projet.php';
+require_once '../../core/Auth.php';
+$auth = new Auth();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,12 +16,22 @@ require_once '../../model/projet.php';
     <?php include("../includes/header.php"); ?>
 
 <main class="mx-auto p-6">
-    
-    <div class="flex justify-end">
-        <button id="buttonAddProjet" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
-            <i class="bi bi-plus-circle mr-2"></i>Ajouter Projet
-        </button>
-    </div>
+    <div class= "flex justify-between items-center">
+        <a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
+            class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+            Détail sur Projet
+        </a> 
+        <?php 
+            if ($auth->hasPermission('create_project')) {
+                echo '
+                    <div class=" flex justify-end">
+                        <button id="buttonAddProjet" class = "bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold "><i class="bi bi-plus-circle mr-2"></i>Ajouter Projet</button>
+                    </div>
+                ';
+            }
+        ?>
+
+    </div> 
     
     <section>
         <div class="container mx-auto p-6">
@@ -121,21 +133,6 @@ require_once '../../model/projet.php';
     </section>
 
 </main>
-
-<script>
-    const ModelProjet = document.querySelector("#ModelProjet");
-    const buttonAddProjet = document.querySelector("#buttonAddProjet");
-    const closeModelProjet = document.querySelector("#closeModelProjet");
-
-    // Toggle modal visibility
-    buttonAddProjet.addEventListener('click', function() {
-        ModelProjet.classList.toggle("hidden");
-    });
-
-    closeModelProjet.addEventListener('click', function() {
-        ModelProjet.classList.toggle("hidden");
-    });
-</script>
-
+<script src="../../assets/js/main.js"></script>
 </body>
 </html>

@@ -47,12 +47,12 @@ class Auth {
 
     public function hasPermission($perm) {
         if (!isset($_SESSION['role_id'])) {
-            return false; // إذا ما كانش الدور موجود فالجلسة
+            return false;
         }
     
         $permissions = $this->permParId($_SESSION['role_id']);
     
-        return in_array($perm, $permissions); // تحقق واش الصلاحية كاينة
+        return in_array($perm, $permissions);
     }
     
 }

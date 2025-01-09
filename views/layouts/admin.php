@@ -36,10 +36,10 @@ if (isset($_SESSION['message'])) {
             ';
         }
         ?>
-<a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
-   class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
-   Détail sur Projet
-</a>        
+        <a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
+        class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+        Détail sur Projet
+        </a>        
         
     </div>
 
@@ -159,41 +159,6 @@ if (isset($_SESSION['message'])) {
     </main>
 
 
-    <script>
-        const menu_navbar = document.querySelector("#menu_navbar");
-        const img_menu = document.querySelector("#img_menu");
-        const ModelProjet  = document.querySelector("#ModelProjet ");
-        const buttonAddProjet  = document.querySelector("#buttonAddProjet");
-        const closeModelProjet  = document.querySelector("#closeModelProjet");
-
-
-        img_menu.addEventListener('click', function() {
-            menu_navbar.classList.toggle("hidden");
-        });
-        closeModelProjet.addEventListener('click', function() {
-            ModelProjet.classList.toggle("hidden");
-        });
-        buttonAddProjet.addEventListener('click', function() {
-            ModelProjet.classList.toggle("hidden");
-        });
-
-
-
-        window.onload = function() {
-        const alertMessage = document.getElementById('alert-message');
-        
-        if (alertMessage) {
-            setTimeout(function() {
-                alertMessage.classList.add('opacity-0'); 
-                alertMessage.classList.add('transition-opacity');
-                setTimeout(function() {
-                    alertMessage.remove();
-                }, 300);
-            }, 2000);
-        }
-    };
-
-
-    </script>
+<script src="../../assets/js/main.js"></script>
 </body>
 </html>
