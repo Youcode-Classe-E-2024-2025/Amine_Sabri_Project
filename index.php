@@ -51,6 +51,10 @@ if (isset($_GET['action'])) {
             $task = new RoleController;
             $task->createRoleAction();
             break;
+        case 'updateRolePermissions':
+            $task = new RoleController;
+            $task->updateRolePermissionsAction();
+            break;
 
         // Uncomment and complete if needed
         // case 'updateTask':

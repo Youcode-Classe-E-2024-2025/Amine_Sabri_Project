@@ -22,6 +22,31 @@ class RoleController {
         }
     }
 
+
+    public function updateRolePermissionsAction() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['role_id']) && !empty($_POST['role_id'])) {
+                $roleId = (int)$_POST['role_id'];
+                $permissions = isset($_POST['permissions']) ? $_POST['permissions'] : [];
+
+                $modelRole = new Role();
+                $success = $modelRole->updateRolePermissions($roleId, $permissions);
+
+                if ($success) {
+                    $_SESSION['message'] = "Permissions mises à jour avec succès !";
+                } else {
+                    $_SESSION['error'] = "Une erreur est survenue lors de la mise à jour des permissions.";
+                }
+                header("Location: views/layouts/manager.php");
+                exit();
+            } else {
+                $_SESSION['error'] = "ID du rôle est requis.";
+                header("Location: views/layouts/manager.php");
+                exit();
+            }
+        }
+
     
 }
 
+}

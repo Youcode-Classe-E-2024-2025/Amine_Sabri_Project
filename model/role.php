@@ -59,22 +59,28 @@ class Role {
             return false;
         }
     }
-    
+    public static function getAllRoles() {
+        $database = new Database();
+        $db = $database->getConnection();
+        $sql = 'SELECT * FROM roles';
+        $stmt = $db->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     
 
    
 }
 
-$role = new Role();
-$roleId = 3; 
-$newPermissions = [1]; 
+// $role = new Role();
+// $roleId = 3; 
+// $newPermissions = [1]; 
 
-if ($role->updateRolePermissions($roleId, $newPermissions)) {
-    echo "Les permissions pour le rôle ID $roleId ont été mises à jour avec succès.";
-} else {
-    echo "Une erreur s'est produite lors de la mise à jour des permissions.";
-}
+// if ($role->updateRolePermissions($roleId, $newPermissions)) {
+//     echo "Les permissions pour le rôle ID $roleId ont été mises à jour avec succès.";
+// } else {
+//     echo "Une erreur s'est produite lors de la mise à jour des permissions.";
+// }
 
 // $role = new Role();
 
