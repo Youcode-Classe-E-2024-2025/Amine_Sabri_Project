@@ -19,9 +19,9 @@ require_once '../../model/role.php';
         <!-- <button id="addUser" class="px-4 py-2 bg-blue-600 text-white font-semibold rounded shadow hover:bg-blue-700">
             Ajouter un utilisateur
         </button> -->
-        <button class="px-4 py-2 bg-green-600 text-white font-semibold rounded shadow hover:bg-green-700">
+        <a href = "./CreateRole.php" class="px-4 py-2 bg-green-600 text-white font-semibold rounded shadow hover:bg-green-700">
             Ajouter un rôle
-        </button>
+        </a>
     </div>
     
     <?php
