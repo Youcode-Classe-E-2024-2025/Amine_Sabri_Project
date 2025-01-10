@@ -24,7 +24,7 @@ require_once('../model/user.php');
 
     <script>
     <?php 
-        // Récupérer les données depuis PHP
+
         $tasks = Task::getAllTask();
         $projects = Projet::getAllProjet();
         $users = User::getAll();
@@ -33,12 +33,10 @@ require_once('../model/user.php');
         $totalProjet = count($projects);
         $totalUsers = count($users);
 
-        // Générer les données pour JavaScript
         echo "var xValues = ['Tasks', 'Projects', 'Users'];";
         echo "var yValues = [$totalTask, $totalProjet, $totalUsers];";
         echo "var barColors = ['#b91d47', '#00aba9', '#2b5797'];";
     ?>
-    // Graphique en camembert (Pie Chart)
     new Chart("pieChart", {
         type: "pie",
         data: {
@@ -56,7 +54,6 @@ require_once('../model/user.php');
         }
     });
 
-    // Graphique en barres (Bar Chart)
     new Chart("barChart", {
         type: "bar",
         data: {
