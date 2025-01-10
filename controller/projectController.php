@@ -16,7 +16,7 @@
         
                 if (empty(trim($name)) || empty(trim($description)) || empty(trim($create_by)) || empty(trim($visibility)) || (is_array($assignUsers) && empty($assignUsers))) {
                     $_SESSION['error'] = "Tous les champs sont obligatoires.";
-                    header('Location: views/layouts/admin.php');
+                    header('Location: ' . $_SERVER['HTTP_REFERER']);
                     exit;
                 }
 
@@ -29,7 +29,7 @@
                     $_SESSION['error'] = "Erreur lors de la création du projet : " . $result;
                 }
         
-                header('Location: views/layouts/admin.php');
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
                 exit;
             }
         }

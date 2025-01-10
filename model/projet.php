@@ -3,7 +3,9 @@
 
     class Projet{
         private $db;
-
+        private $name;
+        private $description;
+        private $visibility;
 
         public function __construct(){
             $database = new Database();

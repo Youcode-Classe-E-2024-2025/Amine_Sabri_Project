@@ -3,6 +3,9 @@ require_once __DIR__ . '/../config/Database.php';
 
 class Task {
     private $db;
+    private $task_name;
+    private  $status;
+    private $assigned_to;
 
     public function __construct() {
         $database = new Database();

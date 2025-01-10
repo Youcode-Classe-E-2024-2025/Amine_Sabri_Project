@@ -3,6 +3,8 @@ require_once __DIR__ . '/../config/Database.php';
 
 class Role {
     private $db;
+    private $name;
+    private $permissions;
 
     public function __construct() {
         $database = new Database();
