@@ -125,17 +125,6 @@ if (isset($_SESSION['message'])) {
 
     </main>
     <script>
-        const buttonAddTask = document.querySelector('#buttonAddTask');
-        const modelAddTask = document.querySelector('#modelAddTask');
-        const closeModelTask = document.querySelector('#closeModelTask');
-
-        buttonAddTask.addEventListener('click',function(){
-            modelAddTask.classList.remove('hidden')
-        })
-        closeModelTask.addEventListener('click',function(){
-            modelAddTask.classList.toggle('hidden')
-        })
-
         window.onload = function() {
         const alertMessage = document.getElementById('alert-message');
         
@@ -150,5 +139,6 @@ if (isset($_SESSION['message'])) {
         }
     };
     </script>
+        <script src="../../assets/js/main.js"></script>
 </body>
 </html>
