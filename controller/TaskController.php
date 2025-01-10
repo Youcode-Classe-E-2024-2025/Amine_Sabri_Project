@@ -90,6 +90,26 @@ class TaskController{
         exit;
     }
 
+
+    public function destroy() {
+        $isPermission = new Auth();
+        $isPermission->checkPerm('delete_task');
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['taskId'])) {
+                $taskId = $_POST['taskId'];
+                $taskModel = new Task();
+                $result = $taskModel->delete($taskId);
+                
+                if ($result === true) {
+                    header("Location: " . $_SERVER['HTTP_REFERER']);
+                    exit;
+                } else {
+                    echo "Erreur: " . $result;
+                }
+            }
+        }
+    }
     
 }
 

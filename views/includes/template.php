@@ -17,10 +17,18 @@
                                 <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
                                     <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
                                 </a>             
-                            <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                    <h3 class="font-semibold text-xl text-gray-800 truncate">
                                         <?= htmlspecialchars($task['task_name']); ?>
                                     </h3>
-                                    <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>
+
+                                    
+                                    <form action="http://localhost/amine_Sabri_Project/index.php?action=deleteTask" method="POST">
+                                        <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
+                                        <button type="submit" class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></button>
+                                    </form>
+
+
+
                                 </div>
                                 <div class="status-tache mt-2 flex justify-between text-[10px]">
                                     <p class="border-2 text-center font-bold rounded-md px-2 border-red-500 text-red-500">
@@ -76,10 +84,14 @@
                                     <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
                                     <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
                                         <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
-                                    </a>                                           <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                    </a>                                          
+                                         <h3 class="font-semibold text-xl text-gray-800 truncate">
                                             <?= htmlspecialchars($task['task_name']); ?>
                                         </h3>
-                                        <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>
+                                    <form action="http://localhost/amine_Sabri_Project/index.php?action=deleteTask" method="POST">
+                                        <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
+                                        <button type="submit" class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></button>
+                                    </form>
                                     </div>
                                     <div class="status-tache mt-2 flex justify-between text-[10px]">
                                         <p class="border-2 text-center font-bold rounded-md px-2 border-yellow-500 text-yellow-500">
@@ -137,10 +149,14 @@
                                     <div class="header-tache border-b-2 border-gray-300 flex justify-between items-center pb-2">
                                     <a href="../layouts/editStatus.php?id=<?= htmlspecialchars($task['id']); ?>&id_project=<?= htmlspecialchars($project_id); ?>">
                                         <i class="bi bi-pencil-square text-blue-600" aria-label="Edit task"></i>
-                                    </a>                                            <h3 class="font-semibold text-xl text-gray-800 truncate">
+                                    </a>                                           
+                                     <h3 class="font-semibold text-xl text-gray-800 truncate">
                                             <?= htmlspecialchars($task['task_name']); ?>
                                         </h3>
-                                        <i class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></i>
+                                    <form action="http://localhost/amine_Sabri_Project/index.php?action=deleteTask" method="POST">
+                                        <input type="hidden" name="taskId" value="<?= $task['id'] ?>">
+                                        <button type="submit" class="bi bi-trash text-red-600 cursor-pointer hover:text-red-800" aria-label="Delete task"></button>
+                                    </form>
                                     </div>
                                     <div class="status-tache mt-2 flex justify-between text-[10px]">
                                         <p class="border-2 text-center font-bold rounded-md px-2 border-green-500 text-green-500">

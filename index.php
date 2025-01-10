@@ -47,6 +47,10 @@ if (isset($_GET['action'])) {
             $task = new TaskController();
             $task->updateTaskStatus();
             break;
+        case 'deleteTask':
+            $task = new TaskController();
+            $task->destroy();
+            break;
         case 'exportTasks':
             $task = new TaskController();
             $task->exportTasks();
