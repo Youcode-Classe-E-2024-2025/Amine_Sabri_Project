@@ -11,7 +11,6 @@ if ($projectId) {
     $data = $project->getAllProjetss();
 
     if ($data) {
-        // Recherche le projet avec l'ID correspondant
         $projectData = null;
         foreach ($data as $projectItem) {
             if ($projectItem['id'] == $projectId) {

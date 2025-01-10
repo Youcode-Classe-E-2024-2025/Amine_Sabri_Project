@@ -27,7 +27,7 @@ if (isset($_SESSION['message'])) {
     <?php include('../includes/header.php') ?>
 
     <main class="container mx-auto p-6">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-end items-center">
             <?php 
             if ($auth->hasPermission('create_project')) {
                 echo '
@@ -38,10 +38,7 @@ if (isset($_SESSION['message'])) {
                     </div>
                 ';
             }
-            ?>
-            <a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
-                Détail sur Projet
-            </a>        
+            ?>      
         </div>
 
         <section>
