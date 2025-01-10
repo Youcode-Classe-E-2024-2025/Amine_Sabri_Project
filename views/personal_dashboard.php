@@ -19,6 +19,8 @@ $statistics = Task::getUserStatistics($userId);
 <body class="bg-gray-100">
 <?php include("includes/header.php"); ?>
     <div class="container mx-auto p-6">
+    <a href="<?= isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '#' ?>" class="text-blue-500 underline">Retour</a>
+
         <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Mon Dashboard Personnel</h1>
         
         <!-- Statistiques -->
@@ -43,5 +45,6 @@ $statistics = Task::getUserStatistics($userId);
 
         
     </div>
+    <script src="./../assets/js/main.js"></script>
 </body>
 </html>
