@@ -85,6 +85,16 @@
             return $projet;
         }
 
+        public static function getAllProjetss(){
+            $database = new Database();
+            $db = $database->getConnection();
+            $sql = "SELECT * FROM projects";
+            $test = $db->query($sql);
+            $projet = $test->fetchAll(PDO::FETCH_ASSOC);
+            return $projet;
+        }
+        
+
         public static function getAllProjetPublic(){
             $database = new Database();
             $db = $database->getConnection();

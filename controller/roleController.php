@@ -32,15 +32,15 @@ class RoleController {
                 $modelRole = new Role();
                 $success = $modelRole->updateRolePermissions($roleId, $permissions);
 
-                if ($success) {
-                    $_SESSION['message'] = "Permissions mises à jour avec succès !";
-                } else {
-                    $_SESSION['error'] = "Une erreur est survenue lors de la mise à jour des permissions.";
-                }
+                // if ($success) {
+                //     $_SESSION['message'] = "Permissions mises à jour avec succès !";
+                // } else {
+                //     $_SESSION['error'] = "Une erreur est survenue lors de la mise à jour des permissions.";
+                // }
                 header("Location: views/layouts/manager.php");
                 exit();
             } else {
-                $_SESSION['error'] = "ID du rôle est requis.";
+                // $_SESSION['error'] = "ID du rôle est requis.";
                 header("Location: views/layouts/manager.php");
                 exit();
             }
