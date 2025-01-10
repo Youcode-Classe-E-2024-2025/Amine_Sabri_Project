@@ -150,6 +150,27 @@ class Task {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    public static function getUserStatistics($userId)
+{
+    // Obtenir la connexion PDO depuis la classe Database
+    $database = new Database();
+    $db = $database->getConnection(); 
+    
+    $query = "SELECT 
+                COUNT(*) AS total_tasks,
+                SUM(CASE WHEN status = 'to_do' THEN 1 ELSE 0 END) AS to_do,
+                SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) AS in_progress,
+                SUM(CASE WHEN status = 'done' THEN 1 ELSE 0 END) AS done
+              FROM tasks
+              WHERE assigned_to = :userId";
+
+    $stmt = $db->prepare($query); // Remplacement de `$this->db` par `$db`
+    $stmt->execute(['userId' => $userId]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 }
 
 
