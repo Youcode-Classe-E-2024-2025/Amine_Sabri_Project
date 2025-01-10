@@ -17,10 +17,6 @@ $auth = new Auth();
 
 <main class="mx-auto p-6">
     <div class= "flex justify-between items-center">
-        <a href="détailProjet.php?referer=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
-            class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
-            Détail sur Projet
-        </a> 
         <?php 
             if ($auth->hasPermission('create_project')) {
                 echo '
@@ -52,24 +48,37 @@ $auth = new Auth();
                                     <div class='bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 p-2'>
                                         <h2 class='text-xl font-bold mb-1 text-white'>{$project['name']}</h2>
                                     </div>
-                                    <div class='p-4'>
+                                    <div class='p-4 flex justify-between items-center'>
                                         <p class='text-gray-700 mb-2'>
                                             <strong>Visibility:</strong> <span class='{$visibilityColor}'>" . ucfirst($project['visibility']) . "</span>
                                         </p>
-                                        <p class='text-gray-700 mb-2'>
-                                            <strong>Description:</strong> {$project['description']}
-                                        </p>
-                                        <p class='text-gray-700 mb-2'>
-                                            <strong>Users:</strong> {$project['users_name']}
-                                        </p>
-                                        <div class=''>
+
+                                        <div class=''>";
+                                        
+                                        if ($auth->hasPermission('update_project')) {
+                                            echo "
                                             <a href='editProject.php?id={$project['id']}' class='text-indigo-500 py-1 px-3 rounded-full hover:text-indigo-700 transition duration-300'>
                                                 <i class='bi bi-pencil-square'></i>
-                                            </a>
+                                            </a>";
+                                        }
+                                        
+                                        if ($auth->hasPermission('delete_project')) {
+                                            echo "
+                                            <form action='http://localhost/amine_Sabri_Project/index.php?action=deleteProjet' method='POST' class='inline'>
+                                                <input type='hidden' name='id' value='{$project['id']}'>
+                                                <button type='submit' class='text-green-500 py-1 px-3 rounded-full hover:text-green-700 transition duration-300'>
+                                                    <i class='bi bi-trash-fill'></i>
+                                                </button>
+                                            </form>";
+                                        }
+                                        
+                                        echo "
                                         </div>
                                     </div>
-                                </a>    
-                            </div>";    
+                                    <a href='readme.php?id={$project['id']}' class='inline-block mb-4 ml-4 text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out transform hover:scale-110 hover:underline'>
+                                        <i class='bi bi-file-earmark-text mr-2'></i> Voir le README
+                                    </a>
+                                </div>";   
                         }
                     } else {
                         echo "<p class='text-center text-gray-500'>No projects available at the moment.</p>";
