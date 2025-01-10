@@ -33,6 +33,11 @@
                 Se connecter
             </button>
         </form>
+        <p class="text-center text-sm text-gray-600 mt-4">
+        Pas encore de compte ? 
+        <a href="./signUp.php" 
+           class="text-blue-500 font-bold hover:underline">Inscrivez-vous</a>
+    </p>
     </div>
 
     <script>

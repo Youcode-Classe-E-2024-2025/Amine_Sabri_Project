@@ -123,7 +123,7 @@ class User{
 }
 
 $user = new User();
-$user->deleteUser(2);
+// $user->deleteUser(2);
 // $user->UpdateUser(1, 'Amine', 'amine@gmail.com', '123456', 2);
 // $insert->signUp("user","user@gmail.com","123456");
 // $insert->signIn("user@gmail.com","123456");

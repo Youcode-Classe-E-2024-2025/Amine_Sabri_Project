@@ -39,6 +39,11 @@
                 Sign Up
             </button>
         </form>
+        <p class="text-center text-sm text-gray-600 mt-4">
+            Vous avez déjà un compte ? 
+        <a href="./signIn.php" 
+           class="text-blue-500 font-bold hover:underline">Connectez-vous</a>
+    </p>
     </div>
 
     <script>
