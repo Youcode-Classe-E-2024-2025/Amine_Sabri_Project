@@ -27,18 +27,25 @@ if (isset($_SESSION['message'])) {
     <?php include('../includes/header.php')?>
     <main >
 
-
-    <?php 
-    if ($auth->hasPermission('create_task')) {
-        echo '
-        <div class="flex justify-end mt-10 pr-6">
-            <button id="buttonAddTask" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
-                <i class="bi bi-plus-circle mr-2"></i>Ajouter Task
+    <div class= "flex justify-between items-center  m-10">
+        <form action="http://localhost/amine_Sabri_Project/index.php?action=exportTasks" method="post">
+            <button type="submit" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+                Exporter les Tâches en Excel
             </button>
-        </div>
-        ';
-    }
-    ?>
+        </form>
+        <?php 
+        if ($auth->hasPermission('create_task')) {
+            echo '
+            <div class="flex justify-end  pr-6">
+                <button id="buttonAddTask" class="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 px-8 py-1 rounded-lg text-white font-bold">
+                    <i class="bi bi-plus-circle mr-2"></i>Ajouter Task
+                </button>
+            </div>
+            ';
+        }
+        ?>
+        
+    </div>
 
         <?php include('../includes/template.php')?>
 

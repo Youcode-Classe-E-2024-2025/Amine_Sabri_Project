@@ -25,7 +25,6 @@ if (isset($_SESSION['message'])) {
 </head>
 <body>
     <?php include('../includes/header.php') ?>
-
     <main class="container mx-auto p-6">
         <div class="flex justify-end items-center">
             <?php 

@@ -61,48 +61,6 @@ class Task {
         }
     }
 
-    public function update($taskId, $task_name, $status, $assigned_to, $userIds, $tagIds, $category_name) {
-        try {
-            $sql = "UPDATE tasks SET name = ?, status = ?, assigned_to = ? WHERE id = ?";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute([$task_name, $status, $assigned_to, $taskId]);
-
-            $sqlDeleteUsers = "DELETE FROM user_task WHERE task_id = ?";
-            $stmtDeleteUsers = $this->db->prepare($sqlDeleteUsers);
-            $stmtDeleteUsers->execute([$taskId]);
-
-            $sqlUsers = "INSERT INTO user_task (user_id, task_id) VALUES (?, ?)";
-            $stmtUsers = $this->db->prepare($sqlUsers);
-            foreach ($userIds as $user) {
-                $stmtUsers->execute([$user, $taskId]);
-            }
-
-            $sqlDeleteTags = "DELETE FROM task_tag WHERE task_id = ?";
-            $stmtDeleteTags = $this->db->prepare($sqlDeleteTags);
-            $stmtDeleteTags->execute([$taskId]);
-
-            $sqlTags = "INSERT INTO task_tag (tag_id, task_id) VALUES (?, ?)";
-            $stmtTags = $this->db->prepare($sqlTags);
-            foreach ($tagIds as $tag) {
-                $stmtTags->execute([$tag, $taskId]);
-            }
-
-            if (!empty($category_name)) {
-                $sqlCategory = "INSERT INTO category (name, task_id) VALUES (?, ?) ON DUPLICATE KEY UPDATE name = ?";
-                $stmtCategory = $this->db->prepare($sqlCategory);
-                $stmtCategory->execute([$category_name, $taskId, $category_name]);
-            } else {
-                $sqlDeleteCategory = "DELETE FROM category WHERE task_id = ?";
-                $stmtDeleteCategory = $this->db->prepare($sqlDeleteCategory);
-                $stmtDeleteCategory->execute([$taskId]);
-            }
-
-            return true;
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
     public static function getAllTags(){
         $database = new Database();
         $db = $database->getConnection();
@@ -182,6 +140,16 @@ class Task {
         $test = $this->db->prepare($sql);
         return $test->execute([$status,$idtask]);
     }
+
+    public function getTasks()
+    {
+        $query = "SELECT t.name AS task_name, t.status, u.name AS assigned_user, t.created_at 
+                  FROM tasks t 
+                  LEFT JOIN users u ON t.assigned_to = u.id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 
@@ -216,9 +184,9 @@ $task = new Task();
 // }
 
 
-// Update
+// Update()
 
-// $task = new Task();
+$task = new Task();
 // $result = $task->update(4, "Updated Task Name","in_progress", 1, [1, 2, 3], [2, 3], "New Category");
 
 // if ($result === true) {

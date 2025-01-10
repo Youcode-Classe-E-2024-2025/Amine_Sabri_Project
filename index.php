@@ -47,6 +47,10 @@ if (isset($_GET['action'])) {
             $task = new TaskController();
             $task->updateTaskStatus();
             break;
+        case 'exportTasks':
+            $task = new TaskController();
+            $task->exportTasks();
+            break;
         case 'createRole':
             $task = new RoleController;
             $task->createRoleAction();

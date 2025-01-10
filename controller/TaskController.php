@@ -1,6 +1,9 @@
 <?php
 require_once 'model/Task.php';
 require_once 'core/Auth.php';
+require 'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
 class TaskController{
@@ -34,7 +37,7 @@ class TaskController{
 
     public function updateTaskStatus(){
         $isPermission = new Auth();
-        $isPermission->checkPerm('update_tas');
+        $isPermission->checkPerm('update_task');
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $taskId = $_POST['taskId'];
             $status = $_POST['status'];
@@ -51,6 +54,40 @@ class TaskController{
 
 
         }
+    }
+
+    public function exportTasks()
+    {
+        $taskModel = new Task();
+        $tasks = $taskModel->getTasks();
+
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'Nom de la Tâche');
+        $sheet->setCellValue('B1', 'Statut');
+        $sheet->setCellValue('C1', 'Assigné à');
+        $sheet->setCellValue('D1', 'Date de Création');
+
+        $row = 2;
+        foreach ($tasks as $task) {
+            $sheet->setCellValue('A' . $row, $task['task_name']);
+            $sheet->setCellValue('B' . $row, ucfirst(str_replace('_', ' ', $task['status'])));
+            $sheet->setCellValue('C' . $row, $task['assigned_user'] ?? 'Non Assigné');
+            $sheet->setCellValue('D' . $row, $task['created_at']);
+            $row++;
+        }
+
+        $sheet->getStyle('A1:D1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:D1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'tasks_export.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        $writer->save('php://output');
+        exit;
     }
 
     
